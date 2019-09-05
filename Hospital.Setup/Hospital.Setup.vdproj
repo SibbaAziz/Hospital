@@ -8164,7 +8164,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Hospital.Setup"
         "ProductCode" = "8:{1F272967-A0AF-41EF-91C5-DD5288A2DA7A}"
-        "PackageCode" = "8:{DCDDE942-2C3A-484A-AD6D-332F12439469}"
+        "PackageCode" = "8:{C4740BF4-822A-48A7-B019-10D536415106}"
         "UpgradeCode" = "8:{5444A916-3F70-44FA-8B55-1901F5515E3E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -8287,7 +8287,7 @@
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2586BAE1F17D43B1A5B1CCDCCED5B4B8"
             {
             "Name" = "8:Go"
-            "Arguments" = "8:"
+            "Arguments" = "8:Hospital.wpf.exe"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"

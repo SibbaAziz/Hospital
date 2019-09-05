@@ -4,43 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:local="clr-namespace:Hospital"
+        xmlns:views="clr-namespace:Hospital.Wpf.Views"
         mc:Ignorable="d"
-        Title="Hopital" Height="450" Width="800"
-        xmlns:controls1="clr-namespace:Hospital.Wpf.Controls">
+        Title="Hopital" Height="450" Width="800">
     <Border Padding="5">
         <TabControl>
             <TabItem Header="Planning">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid Margin="0,0,0,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            <ColumnDefinition ></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Date du : " VerticalAlignment="Center"></TextBlock>
-                            <DatePicker SelectedDate="{Binding ElementName=PlaningControl, Path=StartDate}"></DatePicker>
-                            <TextBlock Text="  Au : " VerticalAlignment="Center"></TextBlock>
-                            <DatePicker Margin="5,0" SelectedDate="{Binding ElementName=PlaningControl, Path=EndDate}"></DatePicker>
-                            <TextBlock Text="  Département  " VerticalAlignment="Center" />
-                            <ComboBox ItemsSource="{Binding Departments}" SelectedItem="{Binding SelectedDepartment}" Width="200" VerticalAlignment="Center" DisplayMemberPath="Name"/>
-                            <TextBlock Text="  Service  " VerticalAlignment="Center" />
-                            <ComboBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Width="200" VerticalAlignment="Center" DisplayMemberPath="Name"/>
-                        </StackPanel>
-                        <Button Grid.Column="1" Width="100" HorizontalAlignment="Right" Content="Créer" Command="{Binding ValidateCommand}" CommandParameter="{Binding ElementName=PlaningControl}" />
-                    </Grid>
-                    <Border Background="#FFF0F0F0" Grid.Row="1" Padding="5">
-                        <controls1:PlaningControl x:Name="PlaningControl" ResourceItems="{Binding Resources}" />
-                    </Border>
-                    
-
-                </Grid>
+                <views:PlanningView></views:PlanningView>
             </TabItem>
-            <TabItem Header="Paie"></TabItem>
+            <TabItem Header="Paie">
+            </TabItem>
         </TabControl>
         
     </Border>

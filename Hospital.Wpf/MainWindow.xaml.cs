@@ -14,6 +14,7 @@ namespace Hospital.Wpf
         {
             set => DataContext = value;
         }
+
         public MainWindow()
         {
             InitializeComponent();

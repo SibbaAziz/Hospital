@@ -2,6 +2,7 @@
 using Hospital.Core.Repository;
 using Hospital.Data.Repositories;
 using Hospital.Wpf.ViewModels;
+using Hospital.Wpf.Views;
 using Unity;
 
 namespace Hospital.Wpf
@@ -17,6 +18,9 @@ namespace Hospital.Wpf
             var unity = new UnityContainer();
             unity.RegisterType<IRepository, MemoryRepository>();
             unity.RegisterType<IMainWindowModel, MainWindowViewModel>();
+            unity.RegisterType<IPlanningViewModel, PlanningViewModel>();
+
+            unity.Resolve<PlanningView>();
             var mainWindow = unity.Resolve<MainWindow>(); // Creating Main window
 
             mainWindow.Show();
