@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArrayOfService>
+  <Service>
+    <Id>1</Id>
+    <Name>Surveillance Générale</Name>
+  </Service>
+  <Service>
+    <Id>2</Id>
+    <Name>Hospitalisation Gynéco-obstétrique</Name>
+  </Service>
+</ArrayOfService>
