@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Hospital.Core.Models;
 using Hospital.Data.Data;
+using Hospital.Data.Repositories;
 
 namespace Hospital.Migrations
 {
@@ -22,7 +23,13 @@ namespace Hospital.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+            var memoryRepository = new MemoryRepository();
+            var departments = memoryRepository.GetDepartments();
+
+            context.Departments.AddRange(departments);
+
             
+
         }
     }
 }

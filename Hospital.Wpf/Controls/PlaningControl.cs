@@ -37,7 +37,7 @@ namespace Hospital.Wpf.Controls
             _timeline = GetTemplateChild("Timeline") as Grid;
             _content = GetTemplateChild("Content") as Grid;
 
-            DrawTimeline();
+            DrawTimelineDayNight();
         }
 
         public DateTime StartDate
@@ -120,7 +120,7 @@ namespace Hospital.Wpf.Controls
                 label.Foreground = Brushes.White;
                 label.VerticalAlignment = VerticalAlignment.Center;
                 label.FontWeight = FontWeights.Bold;
-                label.Padding = new Thickness(10);
+                label.Padding = new Thickness(2);
                 label.HorizontalAlignment = HorizontalAlignment.Center;
                 headerBorder.BorderBrush = Brushes.Gray;
                 headerBorder.BorderThickness = new Thickness(0,0,1,0);
@@ -145,6 +145,37 @@ namespace Hospital.Wpf.Controls
             }
         }
 
+        private void DrawTimelineDayNight()
+        {
+            var grid = new Grid();
+            grid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(1, GridUnitType.Star)});
+            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+
+            var day = new Label();
+            day.Content = "Jour";
+            day.FontSize = 14;
+            day.LayoutTransform = new RotateTransform(-90);
+            day.VerticalAlignment = VerticalAlignment.Center;
+            day.HorizontalAlignment = HorizontalAlignment.Center;
+
+            var border = new Border();
+            border.Background = Brushes.BurlyWood;
+
+            var night = new Label();
+            night.Content = "Nuit";
+            night.FontSize = 14;
+            night.LayoutTransform = new RotateTransform(-90);
+            night.VerticalAlignment = VerticalAlignment.Center;
+            night.HorizontalAlignment = HorizontalAlignment.Center;
+            Grid.SetRow(border, 1);
+            grid.Children.Add(day);
+            border.Child = night;
+            grid.Children.Add(border);
+
+            _timeline.Children.Add(grid);
+
+        }
+
         private void DrawTimeline()
         {
             for (int i = 0; i < 24; i++)
@@ -163,7 +194,7 @@ namespace Hospital.Wpf.Controls
                 border.Child = label;
                 _timeline.Children.Add(border);
             }
-            
+
         }
     }
 }

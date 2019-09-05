@@ -31,11 +31,11 @@
                     <Grid x:Name="Root">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="32"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="25"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Service}" FontWeight="Bold" FontSize="14pt" FontStretch="Condensed" Margin="0,5" Grid.ColumnSpan="2"/>
@@ -60,13 +60,13 @@
                 <ControlTemplate TargetType="controls1:ListEditorControl">
                     <Grid x:Name="Root">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30" ></RowDefinition>
+                            <RowDefinition Height="25" ></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Border Background="LightGray"></Border>
-                        <StackPanel x:Name="Controls" Height="30" Visibility="Collapsed" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Content="{StaticResource AppbarUserAdd}" HorizontalAlignment="Right" Style="{StaticResource ImageButton}" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AddCommand}" ToolTip="Ajouter une ressource"  Width="30" />
-                            <Button Content="{StaticResource AppbarGroupDelete}" ToolTip="Supprimer tout" HorizontalAlignment="Right" Style="{StaticResource ImageButton}" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RemoveAllCommand}"  Width="30" />
+                        <StackPanel x:Name="Controls" Height="25" Visibility="Collapsed" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="{StaticResource AppbarUserAdd}" HorizontalAlignment="Right" Style="{StaticResource ImageButton}" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AddCommand}" ToolTip="Ajouter une ressource"  Width="25" />
+                            <Button Content="{StaticResource AppbarGroupDelete}" ToolTip="Supprimer tout" HorizontalAlignment="Right" Style="{StaticResource ImageButton}" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RemoveAllCommand}"  Width="25" />
                         </StackPanel>
                         <ListView Background="Transparent" BorderThickness="0" Grid.Row="1" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ObservableResources}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                             <ListView.Resources>

@@ -26,12 +26,17 @@
                             <DatePicker SelectedDate="{Binding ElementName=PlaningControl, Path=StartDate}"></DatePicker>
                             <TextBlock Text="  Au : " VerticalAlignment="Center"></TextBlock>
                             <DatePicker Margin="5,0" SelectedDate="{Binding ElementName=PlaningControl, Path=EndDate}"></DatePicker>
-                            <TextBlock Text="  Service  " VerticalAlignment="Center" ></TextBlock>
-                            <ComboBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Width="160" VerticalAlignment="Center" DisplayMemberPath="Name"/>
+                            <TextBlock Text="  Département  " VerticalAlignment="Center" />
+                            <ComboBox ItemsSource="{Binding Departments}" SelectedItem="{Binding SelectedDepartment}" Width="200" VerticalAlignment="Center" DisplayMemberPath="Name"/>
+                            <TextBlock Text="  Service  " VerticalAlignment="Center" />
+                            <ComboBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Width="200" VerticalAlignment="Center" DisplayMemberPath="Name"/>
                         </StackPanel>
                         <Button Grid.Column="1" Width="100" HorizontalAlignment="Right" Content="Créer" Command="{Binding ValidateCommand}" CommandParameter="{Binding ElementName=PlaningControl}" />
                     </Grid>
-                    <controls1:PlaningControl x:Name="PlaningControl" ResourceItems="{Binding Resources}" Grid.Row="1"/>
+                    <Border Background="#FFF0F0F0" Grid.Row="1" Padding="5">
+                        <controls1:PlaningControl x:Name="PlaningControl" ResourceItems="{Binding Resources}" />
+                    </Border>
+                    
 
                 </Grid>
             </TabItem>

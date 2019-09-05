@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +32,9 @@
     <Compile Update="Migrations\201909050855491_planningUnit.Designer.cs">
       <DependentUpon>201909050855491_planningUnit.cs</DependentUpon>
     </Compile>
+    <Compile Update="Migrations\201909051403536_employeeUpdate.Designer.cs">
+      <DependentUpon>201909051403536_employeeUpdate.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +43,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Migrations\201909050855491_planningUnit.resx">
       <DependentUpon>201909050855491_planningUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Migrations\201909051403536_employeeUpdate.resx">
+      <DependentUpon>201909051403536_employeeUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
 

@@ -13,7 +13,10 @@ namespace Hospital.Data.Repositories
     {
         public IList<Department> GetDepartments()
         {
-            throw new System.NotImplementedException();
+            using (var db = new ApplicationDbContext())
+            {
+                return db.Departments.Include("Services").Include("Employees").ToList();
+            }
         }
 
         public IList<Employee> GetEmployees()

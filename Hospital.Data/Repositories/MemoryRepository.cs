@@ -9,9 +9,11 @@ namespace Hospital.Data.Repositories
         public IList<Department> GetDepartments()
         {
             var employees = GetEmployees();
+            var services = GetServices();
             return  new List<Department>()
             {
-                new Department(){Id = 1, Name = "Gynéco-obstétrique", Manager = employees[0]}
+                new Department(){Id = 1, Name = "Gynéco-obstétrique", Manager = employees[0], Services = new List<Service>(){services[0]}},
+                new Department(){Id = 1, Name = "Médicaux techniques", Manager = employees[0], Services = new List<Service>(){services[1]}}
             };
         }
 
@@ -37,7 +39,7 @@ namespace Hospital.Data.Repositories
         {
             var employees = GetEmployees();
             var service = new Service { Id = 1, Name = "Consultation Externe de Gynécologie", Manager = employees[0], Employees = new List<Employee> { employees[1], employees[2], employees[3], employees[4] } };
-            var service2 = new Service() { Id = 2, Name = "Bloc de Chirurgie Gynécologique", Manager = employees[0], Employees = new List<Employee> { employees[5] } };
+            var service2 = new Service() { Id = 2, Name = "Bloc de Chirurgie Gynécologique", Manager = employees[0], Employees = new List<Employee> { employees[5], employees[6] } };
             
             return new List<Service>()
             {
