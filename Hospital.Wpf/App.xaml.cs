@@ -11,7 +11,7 @@ namespace Hospital.Wpf
     /// <summary>
     /// Logique d'interaction pour App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -20,7 +20,7 @@ namespace Hospital.Wpf
             unity.RegisterType<IRepository, MemoryRepository>();
             unity.RegisterType<IMainWindowModel, MainWindowViewModel>();
 
-            InjectContainer.RegisterView(typeof(PlanningView), unity.Resolve<PlanningView>());
+            InjectContainer.RegisterView<PlanningView>(unity.Resolve<PlanningView>());
             var mainWindow = unity.Resolve<MainWindow>(); // Creating Main window
 
             mainWindow.Show();

@@ -1,7 +1,4 @@
-﻿using Hospital.Wpf.IoC;
-using Hospital.Wpf.ViewModels;
-using Hospital.Wpf.Views;
-using MahApps.Metro.Controls;
+﻿using Hospital.Wpf.ViewModels;
 using Unity;
 
 namespace Hospital.Wpf
@@ -9,7 +6,7 @@ namespace Hospital.Wpf
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow
     {
         [Dependency]
         public IMainWindowModel VieModel

@@ -1,29 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Hospital.Wpf.IoC
 {
     static class InjectContainer
     {
-        private static Dictionary<Type, UserControl> _views = new Dictionary<Type, UserControl>();
+        private static readonly Dictionary<Type, UserControl> Views = new Dictionary<Type, UserControl>();
 
-        public static void RegisterView(Type type, UserControl view)
+        public static void RegisterView<T>( UserControl view) where T : class
         {
-            if(!_views.ContainsKey(type))
+            if(!Views.ContainsKey(typeof(T)))
             {
-                _views.Add(type, view);
+                Views.Add(typeof(T), view);
             }
         }
 
-        public static UserControl ResolveView(Type type)
+        public static UserControl ResolveView<T>() where T : class
         {
-            if (_views.ContainsKey(type))
-                return _views[type];
-            return null;
+            return Views.ContainsKey(typeof(T)) ? Views[typeof(T)] : null;
         }
     }
 }

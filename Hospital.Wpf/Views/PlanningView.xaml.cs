@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Reflection;
-using System.Windows.Controls;
-using Hospital.Core.Repository;
+﻿using System.Windows.Controls;
 using Hospital.Wpf.ViewModels;
 using Unity;
 
@@ -10,7 +7,7 @@ namespace Hospital.Wpf.Views
     /// <summary>
     /// Logique d'interaction pour PlanningView.xaml
     /// </summary>
-    public partial class PlanningView : UserControl
+    public partial class PlanningView
     {
         [Dependency]
         public PlanningViewModel ViewModel
