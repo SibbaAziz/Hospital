@@ -45,6 +45,7 @@ namespace Hospital.Wpf.Controls
                 edit.Job = resource.Job;
                 edit.Name = resource.Name;
                 edit.IsEditMode = resource.IsEditMode;
+                edit.PhoneNumber = resource.PhoneNumber;
                 edit.IsPresent = resource.IsPresent;
             }
 

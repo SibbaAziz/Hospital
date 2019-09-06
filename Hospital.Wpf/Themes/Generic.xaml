@@ -152,6 +152,7 @@
                                                     </DataTemplate>
                                                 </ComboBox.ItemTemplate>
                                             </ComboBox>
+                                            <TextBlock x:Name="PhoneNumber" Text="{Binding PhoneNumber}" Grid.Row="2"/>
                                             <StackPanel  Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
                                                 <Button x:Name="Delete"  Content="{StaticResource AppbarUserDelete}" Visibility="Collapsed" Width="30" Height="30" Style="{StaticResource ImageButton}"  Command="{Binding RelativeSource={RelativeSource AncestorType=controls1:ListEditorControl}, Path=RemoveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"/>
                                                 <Button x:Name="Validate" Content="{StaticResource AppbarCheck}" Width="30" Height="30" Style="{StaticResource ImageButton}"  Command="{Binding RelativeSource={RelativeSource AncestorType=controls1:ListEditorControl}, Path=ValidateCommand}" CommandParameter="{Binding ElementName=Resources, Path=SelectedItem}"/>
@@ -177,6 +178,7 @@
                                             <Setter TargetName="Edit" Property="Visibility" Value="Visible"/>
                                             <Setter TargetName="Job" Property="Visibility" Value="Visible"/>
                                             <Setter TargetName="Name" Property="Visibility" Value="Visible"/>
+                                            <Setter TargetName="PhoneNumber" Property="Visibility" Value="Visible"></Setter>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding IsPresent}" Value="True">
                                             <Setter TargetName="Present" Property="Visibility" Value="Visible"/>

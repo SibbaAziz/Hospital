@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Controls;
+using Hospital.Core.Repository;
 using Hospital.Wpf.ViewModels;
 using Unity;
 
@@ -11,7 +13,7 @@ namespace Hospital.Wpf.Views
     public partial class PlanningView : UserControl
     {
         [Dependency]
-        public IPlanningViewModel ViewModel
+        public PlanningViewModel ViewModel
         {
             set => DataContext = value;
         }

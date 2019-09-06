@@ -9,7 +9,7 @@ using Hospital.Wpf.Controls;
 
 namespace Hospital.Wpf.ViewModels
 {
-    public class PlanningViewModel : ViewModelBase, IPlanningViewModel
+    public class PlanningViewModel : ViewModelBase
     {
         private readonly IRepository _repository;
 
@@ -69,10 +69,5 @@ namespace Hospital.Wpf.ViewModels
             Resources = SelectedService.Employees.Select(e => new Resource(e)).ToList();
             planingControl.ExecuteCommand.Execute(SelectedService);
         }
-    }
-
-    public interface IPlanningViewModel
-    {
-
     }
 }

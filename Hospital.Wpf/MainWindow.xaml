@@ -9,8 +9,7 @@
         Title="Hopital" Height="450" Width="800">
     <Border Padding="5">
         <TabControl>
-            <TabItem Header="Planning">
-                <views:PlanningView></views:PlanningView>
+            <TabItem Header="Planning"  Content="{Binding PlanningView}">
             </TabItem>
             <TabItem Header="Paie">
             </TabItem>

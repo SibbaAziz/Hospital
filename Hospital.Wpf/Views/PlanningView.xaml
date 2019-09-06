@@ -13,19 +13,19 @@
         </Grid.RowDefinitions>
         <Grid Margin="0,0,0,5">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition ></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal">
+            <WrapPanel Orientation="Horizontal">
                 <TextBlock Text="Date du : " VerticalAlignment="Center"></TextBlock>
                 <DatePicker SelectedDate="{Binding ElementName=PlaningControl, Path=StartDate}"></DatePicker>
                 <TextBlock Text="  Au : " VerticalAlignment="Center"></TextBlock>
                 <DatePicker Margin="5,0" SelectedDate="{Binding ElementName=PlaningControl, Path=EndDate}"></DatePicker>
                 <TextBlock Text="  Département  " VerticalAlignment="Center" />
                 <ComboBox ItemsSource="{Binding Departments}" SelectedItem="{Binding SelectedDepartment}" Width="200" VerticalAlignment="Center" DisplayMemberPath="Name"/>
-                <TextBlock Text="  Service  " VerticalAlignment="Center" />
-                <ComboBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Width="200" VerticalAlignment="Center" DisplayMemberPath="Name"/>
-            </StackPanel>
+                <TextBlock Margin="0,5" Text="  Service  " VerticalAlignment="Center" />
+                <ComboBox Margin="0,5" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Width="200" VerticalAlignment="Center" DisplayMemberPath="Name"/>
+            </WrapPanel>
             <Button Grid.Column="1" Width="100" HorizontalAlignment="Right" Content="Créer" Command="{Binding ValidateCommand}" CommandParameter="{Binding ElementName=PlaningControl}" />
         </Grid>
         <Border Background="#FFF0F0F0" Grid.Row="1" Padding="5">

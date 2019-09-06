@@ -6,5 +6,6 @@
         public string Name { get; set; }
         public string Job { get; set; }
         public bool IsAbsent { get; set; }
+        public string PhoneNumber { get; set; }  
     }
 }

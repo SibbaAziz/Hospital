@@ -217,6 +217,9 @@
     <Compile Include="Controls\ListEditorControl.cs" />
     <Compile Include="Controls\PlaningControl.cs" />
     <Compile Include="Controls\Resource.cs" />
+    <Compile Include="Converters\JobToColorConverter.cs" />
+    <Compile Include="Helpers\JobEnum.cs" />
+    <Compile Include="IoC\InjectContainer.cs" />
     <Compile Include="UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>

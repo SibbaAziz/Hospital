@@ -1,4 +1,6 @@
-﻿using Hospital.Wpf.ViewModels;
+﻿using Hospital.Wpf.IoC;
+using Hospital.Wpf.ViewModels;
+using Hospital.Wpf.Views;
 using MahApps.Metro.Controls;
 using Unity;
 
@@ -10,7 +12,7 @@ namespace Hospital.Wpf
     public partial class MainWindow : MetroWindow
     {
         [Dependency]
-        public IMainWindowModel Repository
+        public IMainWindowModel VieModel
         {
             set => DataContext = value;
         }

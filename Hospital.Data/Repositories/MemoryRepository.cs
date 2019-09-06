@@ -19,14 +19,14 @@ namespace Hospital.Data.Repositories
 
         public IList<Employee> GetEmployees()
         {
-            var manager = new Employee { Id = 1, Name = "Youssef Ruwayd Nahas", Job = "Médecin Spécialiste" };
+            var manager = new Employee { Id = 1, Name = "Youssef Ruwayd Nahas", Job = "Médecin Spécialiste" , PhoneNumber = "75 684 678" };
 
-            var employee = new Employee { Id = 2, Name = "Kutaiba Nabhan Abadi", Job = " Médecin généraliste", IsAbsent = true};
-            var employee1 = new Employee { Id = 3, Name = "Hazar Simah Fakhoury", Job = "Sage-femme" };
-            var employee2 = new Employee { Id = 4, Name = "Nur al Din 'Asim Abboud", Job = "Technicien de surface" };
-            var employee3 = new Employee { Id = 5, Name = "Ayat Johara Toma", Job = "Sage-femme" };
-            var employee4 = new Employee { Id = 7, Name = "Thawab Nur al Huda Essa", Job = "Sage-femme" };
-            var employee5 = new Employee { Id = 8, Name = "Abdul-Muta'al Amjad Bazzi", Job = "Agent d’hygiène" };
+            var employee = new Employee { Id = 2, Name = "Kutaiba Nabhan Abadi", Job = " Médecin généraliste", PhoneNumber = "77 158 551", IsAbsent = true};
+            var employee1 = new Employee { Id = 3, Name = "Hazar Simah Fakhoury", Job = "Sage-femme" , PhoneNumber = "73 877 687" };
+            var employee2 = new Employee { Id = 4, Name = "Nur al Din 'Asim Abboud", Job = "Technicien de surface" , PhoneNumber = "71 863 016" };
+            var employee3 = new Employee { Id = 5, Name = "Ayat Johara Toma", Job = "Sage-femme" , PhoneNumber = "75 781 813" };
+            var employee4 = new Employee { Id = 7, Name = "Thawab Nur al Huda Essa", Job = "Sage-femme", PhoneNumber = "75 655 982" };
+            var employee5 = new Employee { Id = 8, Name = "Abdul-Muta'al Amjad Bazzi", Job = "Agent d’hygiène", PhoneNumber = "77 629 291" };
 
             return new List<Employee>()
             {
