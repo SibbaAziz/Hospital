@@ -33,6 +33,7 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="32"></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="25"></ColumnDefinition>
@@ -48,6 +49,10 @@
                         <Border Grid.Column="1" Grid.Row="2" >
                             <Grid x:Name="Content" ></Grid>
                         </Border>
+                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,5" HorizontalAlignment="Right">
+                            <Button  Content="Valider" />
+                        </StackPanel>
+                        
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

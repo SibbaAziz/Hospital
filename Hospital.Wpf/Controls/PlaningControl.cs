@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
+using Hospital.Core.Helpers;
 using Hospital.Core.Models;
 
 namespace Hospital.Wpf.Controls
@@ -26,7 +29,30 @@ namespace Hospital.Wpf.Controls
         public PlaningControl()
         {
             ExecuteCommand = new RelayCommand<Service>(Execute);
+            ValidateCommand = new RelayCommand(Validate);
             Visibility = Visibility.Hidden;
+        }
+
+        private void Validate()
+        {
+            var planning = new List<PlanningUnit>();
+            foreach (UIElement contentChild in _content.Children)
+            {
+                if (contentChild is Border border)
+                {
+                    if (border.Child is ListEditorControl editor)
+                    {
+                        var planningUniit = new PlanningUnit()
+                        {
+                            Date = editor.Date,
+                            Employees = editor.ObservableResources.Select(r => r.ToEmployee()).ToList(),
+                            DayNight = editor.DayNight
+                        };
+                        planning.Add(planningUniit);
+                    }
+                }
+            }
+
         }
 
         public override void OnApplyTemplate()
@@ -89,8 +115,39 @@ namespace Hospital.Wpf.Controls
 
 
         public RelayCommand<Service> ExecuteCommand { get; set; }
+        public ICommand ValidateCommand { get; set; }
 
         private void Execute(Service service)
+        {
+            InitializeContent(service);
+
+            int days = (EndDate - StartDate).Days;
+            _content.RowDefinitions.Add(new RowDefinition {Height = new GridLength(10, GridUnitType.Star)});
+            _content.RowDefinitions.Add(new RowDefinition { Height = new GridLength(10, GridUnitType.Star) });
+
+
+            for (int i = 0; i <= days; i++)
+            {
+                if (days > 0)
+                {
+                    var columnNumber = 100 / days;
+                    _headers.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(columnNumber, GridUnitType.Star) });
+                    _content.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(columnNumber, GridUnitType.Star) });
+                }
+                
+                var headerBorder = CreateHeaderBorder(i);
+                _headers.Children.Add(headerBorder);
+
+                var dayContent = CreateContentBorder(i, DayNight.Day);
+                _content.Children.Add(dayContent);
+
+                var nightContent = CreateContentBorder(i, DayNight.Night);
+                Grid.SetRow(nightContent, 1);
+                _content.Children.Add(nightContent);
+            }
+        }
+
+        private void InitializeContent(Service service)
         {
             Visibility = Visibility.Visible;
             Service = service.Name;
@@ -99,50 +156,32 @@ namespace Hospital.Wpf.Controls
             _headers.ColumnDefinitions.Clear();
             _content.ColumnDefinitions.Clear();
             _content.RowDefinitions.Clear();
-            
+        }
 
-            int days = (EndDate - StartDate).Days;
-            _content.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(10, GridUnitType.Star)});
-            _content.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(10, GridUnitType.Star) });
+        private Border CreateHeaderBorder(int i)
+        {
+            var headerBorder = new Border();
+            var label = new Label {Content = StartDate.AddDays(i).Date.ToString("dddd d MMM yyyy").ToUpper()};
+            label.Foreground = Brushes.White;
+            label.VerticalAlignment = VerticalAlignment.Center;
+            label.FontWeight = FontWeights.Bold;
+            label.Padding = new Thickness(2);
+            label.HorizontalAlignment = HorizontalAlignment.Center;
+            headerBorder.BorderBrush = Brushes.Gray;
+            headerBorder.BorderThickness = new Thickness(0, 0, 1, 0);
+            headerBorder.Child = label;
+            Grid.SetColumn(headerBorder, i);
+            return headerBorder;
+        }
 
-
-            for (int i = 0; i <= days; i++)
-            {
-                if (days > 0)
-                {
-                    var columnNumber = 100 / days;
-                    _headers.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(columnNumber, GridUnitType.Star) });
-                    _content.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(columnNumber, GridUnitType.Star) });
-                }
-                
-                var headerBorder = new Border();
-                var label = new Label {Content = StartDate.AddDays(i).Date.ToString("dddd d MMM yyyy").ToUpper() };
-                label.Foreground = Brushes.White;
-                label.VerticalAlignment = VerticalAlignment.Center;
-                label.FontWeight = FontWeights.Bold;
-                label.Padding = new Thickness(2);
-                label.HorizontalAlignment = HorizontalAlignment.Center;
-                headerBorder.BorderBrush = Brushes.Gray;
-                headerBorder.BorderThickness = new Thickness(0,0,1,0);
-                headerBorder.Child = label;
-                Grid.SetColumn(headerBorder, i);
-                _headers.Children.Add(headerBorder);
-
-                var border1 = new Border();
-                border1.BorderBrush = Brushes.Gray;
-                border1.BorderThickness = new Thickness(0,0.5,1,0.5);
-                border1.Child = new ListEditorControl(){ResourceItems = ResourceItems};
-                Grid.SetColumn(border1,i);
-                _content.Children.Add(border1);
-
-                var border2 = new Border();
-                border2.BorderBrush = Brushes.Gray;
-                border2.BorderThickness = new Thickness(0, 0.5, 1, 0.5);
-                border2.Child = new ListEditorControl(){ResourceItems = ResourceItems};
-                Grid.SetColumn(border2, i);
-                Grid.SetRow(border2,1);
-                _content.Children.Add(border2);
-            }
+        private Border CreateContentBorder(int i, DayNight dayNight)
+        {
+            var border1 = new Border();
+            border1.BorderBrush = Brushes.Gray;
+            border1.BorderThickness = new Thickness(0, 0.5, 1, 0.5);
+            border1.Child = new ListEditorControl {ResourceItems = ResourceItems, DayNight = dayNight, Date = StartDate.AddDays(i)};
+            Grid.SetColumn(border1, i);
+            return border1;
         }
 
         private void DrawTimelineDayNight()

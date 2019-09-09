@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using Hospital.Core.Helpers;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
 using Hospital.Data.Data;
@@ -44,6 +45,16 @@ namespace Hospital.Data.Repositories
             {
                 return db.Services.Include("Employees").ToList();
             }
+        }
+
+        public IList<PlanningUnit> GetPlanningUnit(int serviceId, DateRange dateRange)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool SavePlanning(int serviceId, IEnumerable<PlanningUnit> planningUnits)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

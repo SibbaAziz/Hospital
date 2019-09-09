@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using Hospital.Core.Helpers;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
 
@@ -48,6 +49,16 @@ namespace Hospital.Data.Repositories
             }
 
             return result;
+        }
+
+        public IList<PlanningUnit> GetPlanningUnit(int serviceId, DateRange dateRange)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool SavePlanning(int serviceId, IEnumerable<PlanningUnit> planningUnits)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
+using Hospital.Core.Helpers;
 
 namespace Hospital.Wpf.Controls
 {
@@ -31,6 +33,10 @@ namespace Hospital.Wpf.Controls
             resource.IsEditMode = true;
             _tobeEdited = resource;
         }
+
+        public DayNight DayNight { get; set; }
+
+        public DateTime Date { get; set; }
 
         private void Validate(Resource resource)
         {
