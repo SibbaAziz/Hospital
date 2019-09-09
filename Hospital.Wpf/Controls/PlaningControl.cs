@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using GalaSoft.MvvmLight.CommandWpf;
 using Hospital.Core.Helpers;
 using Hospital.Core.Models;
+using Hospital.Wpf.Helpers;
 
 namespace Hospital.Wpf.Controls
 {
@@ -29,11 +32,10 @@ namespace Hospital.Wpf.Controls
         public PlaningControl()
         {
             ExecuteCommand = new RelayCommand<Service>(Execute);
-            ValidateCommand = new RelayCommand(Validate);
             Visibility = Visibility.Hidden;
         }
 
-        private void Validate()
+        public IEnumerable<PlanningUnit> Validate()
         {
             var planning = new List<PlanningUnit>();
             foreach (UIElement contentChild in _content.Children)
@@ -42,13 +44,13 @@ namespace Hospital.Wpf.Controls
                 {
                     if (border.Child is ListEditorControl editor)
                     {
-                        var planningUniit = new PlanningUnit()
+                        yield return new PlanningUnit()
                         {
                             Date = editor.Date,
                             Employees = editor.ObservableResources.Select(r => r.ToEmployee()).ToList(),
                             DayNight = editor.DayNight
                         };
-                        planning.Add(planningUniit);
+                        
                     }
                 }
             }
@@ -114,6 +116,20 @@ namespace Hospital.Wpf.Controls
 
 
 
+
+        public bool IsEdited
+        {
+            get { return (bool)GetValue(IsEditedProperty); }
+            set { SetValue(IsEditedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsEdited.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsEditedProperty =
+            DependencyProperty.Register("IsEdited", typeof(bool), typeof(PlaningControl), new PropertyMetadata(false));
+
+
+
+
         public RelayCommand<Service> ExecuteCommand { get; set; }
         public ICommand ValidateCommand { get; set; }
 
@@ -138,10 +154,10 @@ namespace Hospital.Wpf.Controls
                 var headerBorder = CreateHeaderBorder(i);
                 _headers.Children.Add(headerBorder);
 
-                var dayContent = CreateContentBorder(i, DayNight.Day);
+                var dayContent = CreateContentBorder(i, DayNight.Day, service);
                 _content.Children.Add(dayContent);
 
-                var nightContent = CreateContentBorder(i, DayNight.Night);
+                var nightContent = CreateContentBorder(i, DayNight.Night, service);
                 Grid.SetRow(nightContent, 1);
                 _content.Children.Add(nightContent);
             }
@@ -174,12 +190,25 @@ namespace Hospital.Wpf.Controls
             return headerBorder;
         }
 
-        private Border CreateContentBorder(int i, DayNight dayNight)
+        private Border CreateContentBorder(int i, DayNight dayNight, Service service)
         {
             var border1 = new Border();
             border1.BorderBrush = Brushes.Gray;
             border1.BorderThickness = new Thickness(0, 0.5, 1, 0.5);
-            border1.Child = new ListEditorControl {ResourceItems = ResourceItems, DayNight = dayNight, Date = StartDate.AddDays(i)};
+            var planning = service.PlanningUnits?.FirstOrDefault(p => p.Date == StartDate.AddDays(i) && p.DayNight == dayNight);
+
+
+            var listEditorControl = new ListEditorControl {ResourceItems = ResourceItems, DayNight = dayNight, Date = StartDate.AddDays(i), ObservableResources = planning?.Employees.Select(e => new Resource(e)).ToObservableCollection()?? new ObservableCollection<Resource>()};
+
+
+            Binding myBinding = new Binding();
+            myBinding.Source = this;
+            myBinding.Path = new PropertyPath("IsEdited");
+            myBinding.Mode = BindingMode.TwoWay;
+            myBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            BindingOperations.SetBinding(listEditorControl, ListEditorControl.IsEditedProperty, myBinding);
+
+            border1.Child = listEditorControl;
             Grid.SetColumn(border1, i);
             return border1;
         }

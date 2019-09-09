@@ -27,11 +27,26 @@ namespace Hospital.Wpf.Controls
             ObservableResources = new ObservableCollection<Resource>();
         }
 
+
+
+        public bool IsEdited
+        {
+            get { return (bool)GetValue(IsEditedProperty); }
+            set { SetValue(IsEditedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsEdited.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsEditedProperty =
+            DependencyProperty.Register("IsEdited", typeof(bool), typeof(ListEditorControl), new PropertyMetadata(false));
+
+
+
         private Resource _tobeEdited;
         private void Edit(Resource resource)
         {
             resource.IsEditMode = true;
             _tobeEdited = resource;
+            IsEdited = true;
         }
 
         public DayNight DayNight { get; set; }
@@ -64,7 +79,9 @@ namespace Hospital.Wpf.Controls
             if (messageBoxResult == MessageBoxResult.Yes)
             { 
                 ObservableResources.Clear();
+                IsEdited = true;
             }
+            
         }
 
         public ObservableCollection<Resource> ObservableResources { get; set; }
@@ -72,6 +89,7 @@ namespace Hospital.Wpf.Controls
         private void Remove(Resource resource)
         {
             ObservableResources.Remove(resource);
+            IsEdited = true;
         }
 
         public IList<Resource> ResourceItems
@@ -89,6 +107,7 @@ namespace Hospital.Wpf.Controls
         private void Add()
         {
             ObservableResources.Add(new Resource());
+            IsEdited = true;
         }
 
         public ICommand AddCommand { get; set; }

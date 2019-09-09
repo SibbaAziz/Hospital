@@ -1,10 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 using Hospital.Core.Helpers;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
+using Hospital.Migrations;
 
 namespace Hospital.Data.Repositories
 {
+    public static class Context
+    {
+        public static List<Service> Services = new List<Service>();
+    }
+
     public class MemoryRepository : IRepository
     {
         public IList<Department> GetDepartments()
@@ -50,12 +61,55 @@ namespace Hospital.Data.Repositories
 
         public IList<PlanningUnit> GetPlanningUnit(int serviceId, DateRange dateRange)
         {
-            throw new System.NotImplementedException();
+            List<Service> services;
+            // Create an instance of the XmlSerializer.
+            XmlSerializer serializer =
+                new XmlSerializer(typeof(List<Service>));
+
+            // Declare an object variable of the type to be deserialized.
+
+            using (Stream reader = new FileStream("Data/data.xml", FileMode.Open))
+            {
+                // Call the Deserialize method to restore the object's state.
+                services = (List<Service>)serializer.Deserialize(reader);
+            }
+            var service = services.FirstOrDefault(s => s.Id == serviceId);
+            return service?.PlanningUnits?.Where(p => dateRange.GetStart() <= p.Date && p.Date <= dateRange.GetEnd()).ToList();
         }
 
         public bool SavePlanning(int serviceId, IEnumerable<PlanningUnit> planningUnits)
         {
-            throw new System.NotImplementedException();
+            List<Service> services;
+            // Create an instance of the XmlSerializer.
+            XmlSerializer serializer =
+                new XmlSerializer(typeof(List<Service>));
+
+            // Declare an object variable of the type to be deserialized.
+
+            using (Stream reader = new FileStream("Data/services.xml", FileMode.Open))
+            {
+                // Call the Deserialize method to restore the object's state.
+                services = (List<Service>)serializer.Deserialize(reader);
+            }
+
+            var service = services.FirstOrDefault(s => s.Id == serviceId);
+
+            if (service == null)
+            {
+                service = GetServices().FirstOrDefault(s => s.Id == serviceId);
+                services.Add(service);
+            }
+
+            service.PlanningUnits = planningUnits.ToList();
+
+            // Create an XmlTextWriter using a FileStream.
+            Stream fs = new FileStream("Data/data.xml", FileMode.Create);
+            XmlWriter writer =
+                new XmlTextWriter(fs, Encoding.Unicode);
+            // Serialize using the XmlTextWriter.
+            serializer.Serialize(writer, services);
+            writer.Close();
+            return true;
         }
     }
 }

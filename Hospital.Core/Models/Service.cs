@@ -8,6 +8,6 @@ namespace Hospital.Core.Models
         public string Name { get; set; }
         public Employee Manager { get; set; }
         public List<Employee> Employees { get; set; }
-        public IList<PlanningUnit> PlanningUnits { get; set; }
+        public List<PlanningUnit> PlanningUnits { get; set; }
     }
 }

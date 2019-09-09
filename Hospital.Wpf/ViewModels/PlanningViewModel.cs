@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Hospital.Core.Helpers;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
 using Hospital.Wpf.Controls;
@@ -12,6 +13,14 @@ namespace Hospital.Wpf.ViewModels
     public class PlanningViewModel : ViewModelBase
     {
         private readonly IRepository _repository;
+
+        public ICommand ValidateCommand { get; set; }
+
+        public bool IsEdited
+        {
+            get => _isEdited;
+            set { _isEdited = value; RaisePropertyChanged(nameof(IsEdited));}
+        }
 
         public List<Department> Departments
         {
@@ -35,6 +44,7 @@ namespace Hospital.Wpf.ViewModels
         private Department _selectedDepartment;
         private List<Service> _services;
         private List<Department> _departments;
+        private bool _isEdited;
 
         public List<Resource> Resources
         {
@@ -48,7 +58,7 @@ namespace Hospital.Wpf.ViewModels
             set { _services = value; RaisePropertyChanged(nameof(Services)); }
         }
 
-        public ICommand ValidateCommand { get; set; }
+        public ICommand CreateCommand { get; set; }
 
         public Service SelectedService
         {
@@ -59,14 +69,25 @@ namespace Hospital.Wpf.ViewModels
         public PlanningViewModel(IRepository repository)
         {
             _repository = repository;
-            ValidateCommand = new RelayCommand<PlaningControl>(Validate, (c) => SelectedService != null);
-
+            CreateCommand = new RelayCommand<PlaningControl>(Create, (c) => SelectedService != null);
+            ValidateCommand = new RelayCommand<PlaningControl>(Validate);
             Departments = repository.GetDepartments().ToList();
         }
 
         private void Validate(PlaningControl planingControl)
         {
+            var planning = planingControl.Validate();
+            _repository.SavePlanning(SelectedService.Id, planning);
+            planingControl.IsEdited = false;
+        }
+
+        private void Create(PlaningControl planingControl)
+        {
             Resources = SelectedService.Employees.Select(e => new Resource(e)).ToList();
+
+            SelectedService.PlanningUnits = _repository.GetPlanningUnit(SelectedService.Id,
+                new DateRange(planingControl.StartDate, planingControl.EndDate))?.ToList();
+
             planingControl.ExecuteCommand.Execute(SelectedService);
         }
     }

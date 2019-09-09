@@ -11,7 +11,7 @@ namespace Hospital.Wpf.Controls
             Name = employee.Name;
             Job = employee.Job;
             PhoneNumber = employee.PhoneNumber;
-            IsEditMode = true;
+            IsEditMode = false;
             IsPresent = !employee.IsAbsent;
         }
 

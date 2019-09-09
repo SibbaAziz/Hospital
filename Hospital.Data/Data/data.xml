@@ -1,29 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ArrayOfResource>
-  <Resource >
-    <Id>1</Id>
-    <Name>Resource 1</Name>
-    <Job>Chef de service</Job>
-  </Resource>
-  <Resource >
-    <Id>2</Id>
-    <Name>Resource 2</Name>
-    <Job>Médecin Spécialiste</Job>
-  </Resource>
-  <Resource >
-    <Id>3</Id>
-    <Name>Resource 3</Name>
-    <Job>Sage-femme</Job>
-  </Resource>
-  <Resource >
-    <Id>4</Id>
-    <Name>Resource 4</Name>
-    <Job>Infirmier</Job>
-  </Resource>
-  <Resource >
-    <Id>5</Id>
-    <Name>Resource 5</Name>
-    <Job>Technicien de surface</Job>
-    <IsPresent>true</IsPresent>
-  </Resource>
- </ArrayOfResource>
+<ArrayOfService>
+
+</ArrayOfService>
