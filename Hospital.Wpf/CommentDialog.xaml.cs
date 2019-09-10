@@ -10,19 +10,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hospital
+namespace Hospital.Wpf
 {
     /// <summary>
-    /// Logique d'interaction pour UserControl1.xaml
+    /// Logique d'interaction pour CommentDialog.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class CommentDialog : Window
     {
-        public UserControl1()
+        public CommentDialog(string name, string job)
         {
             InitializeComponent();
+            Name.Text = $"{name} - ";
+            Job.Text = $"{job}";
+        }
+
+        public string Comment => CommentTb.Text;
+
+        private void Add(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
         }
     }
 }

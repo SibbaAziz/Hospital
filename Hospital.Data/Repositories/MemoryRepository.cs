@@ -33,7 +33,7 @@ namespace Hospital.Data.Repositories
         {
             var manager = new Employee { Id = 1, Name = "Youssef Ruwayd Nahas", Job = "Médecin Spécialiste" , PhoneNumber = "75 684 678" };
 
-            var employee = new Employee { Id = 2, Name = "Kutaiba Nabhan Abadi", Job = "Médecin généraliste", PhoneNumber = "77 158 551", IsAbsent = true};
+            var employee = new Employee { Id = 2, Name = "Kutaiba Nabhan Abadi", Job = "Médecin généraliste", PhoneNumber = "77 158 551"};
             var employee1 = new Employee { Id = 3, Name = "Hazar Simah Fakhoury", Job = "Sage-femme" , PhoneNumber = "73 877 687" };
             var employee2 = new Employee { Id = 4, Name = "Nur al Din 'Asim Abboud", Job = "Technicien de surface" , PhoneNumber = "71 863 016" };
             var employee3 = new Employee { Id = 5, Name = "Ayat Johara Toma", Job = "Sage-femme" , PhoneNumber = "75 781 813" };

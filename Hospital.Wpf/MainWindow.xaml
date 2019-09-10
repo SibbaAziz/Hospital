@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="Hopital" Height="450" Width="800">
     <Border Padding="5">
         <TabControl>
             <TabItem Header="Planning"  Content="{Binding PlanningView}"/>
             <TabItem Header="Paie"/>
+            <TabItem Header="Personel" Content="{Binding Employees}"/>
         </TabControl>
         
     </Border>

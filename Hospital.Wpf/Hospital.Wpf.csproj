@@ -214,6 +214,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommentDialog.xaml.cs">
+      <DependentUpon>CommentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ListEditorControl.cs" />
     <Compile Include="Controls\PlaningControl.cs" />
     <Compile Include="Controls\Resource.cs" />
@@ -221,14 +224,22 @@
     <Compile Include="Helpers\EnumerableExtension.cs" />
     <Compile Include="Helpers\JobEnum.cs" />
     <Compile Include="IoC\InjectContainer.cs" />
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PlanningViewModel.cs" />
+    <Compile Include="Views\AuthenticationWindow.xaml.cs">
+      <DependentUpon>AuthenticationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employees.xaml.cs">
+      <DependentUpon>Employees.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlanningView.xaml.cs">
       <DependentUpon>PlanningView.xaml</DependentUpon>
     </Compile>
+    <Page Include="CommentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -253,7 +264,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl1.xaml">
+    <Page Include="Views\AuthenticationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -290,6 +305,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Hospital.Authentication\Hospital.Authentication.csproj">
+      <Project>{e2f18b52-9815-4e87-86d2-c94d3c454ba3}</Project>
+      <Name>Hospital.Authentication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hospital.Core\Hospital.Core.csproj">
       <Project>{c792bd4b-58c3-4122-87d9-2edd92a35876}</Project>
       <Name>Hospital.Core</Name>

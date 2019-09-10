@@ -8,7 +8,7 @@ namespace Hospital.Core.Models
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public List<Employee> Employees { get; set; }
+        public List<PlanningEmployee> Employees { get; set; }
         public DayNight DayNight { get; set; }
     }
 }

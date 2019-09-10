@@ -7,7 +7,8 @@ namespace Hospital.Wpf.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase, IMainWindowModel
     {
-        public UserControl PlanningView => InjectContainer.ResolveView<PlanningView>();
+        public Control PlanningView => InjectContainer.ResolveView<PlanningView>();
+        public Control Employees => InjectContainer.ResolveView<Employees>();
     }
 
     public interface IMainWindowModel

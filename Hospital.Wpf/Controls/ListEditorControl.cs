@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using Hospital.Core.Helpers;
+using Hospital.Core.Models;
 
 namespace Hospital.Wpf.Controls
 {
@@ -24,9 +25,18 @@ namespace Hospital.Wpf.Controls
             RemoveAllCommand = new RelayCommand(RemoveAll);
             ValidateCommand = new RelayCommand<Resource>(Validate);
             EditCommand = new RelayCommand<Resource>(Edit);
+            ChangeAbsenceCommand = new RelayCommand<Resource>(ChangeAbsence);
             ObservableResources = new ObservableCollection<Resource>();
         }
 
+        private void ChangeAbsence(Resource employee)
+        {
+            var dialog = new CommentDialog(employee.Name, employee.Job);
+            if (dialog.ShowDialog() == true)
+            {
+                employee.Comment = dialog.Comment;
+            }
+        }
 
 
         public bool IsEdited
@@ -115,5 +125,6 @@ namespace Hospital.Wpf.Controls
         public ICommand RemoveAllCommand { get; set; }
         public ICommand ValidateCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand ChangeAbsenceCommand { get; set; }
     }
 }

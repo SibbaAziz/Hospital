@@ -1,0 +1,23 @@
+﻿<Window x:Class="Hospital.Wpf.CommentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.Wpf"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="Ajouter un commentaire" Height="200" Width="400">
+    <Border Padding="4">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock> <Run x:Name="Name" /> <Run x:Name="Job"  FontWeight="Bold"/></TextBlock>
+            <TextBox x:Name="CommentTb" Grid.Row="1" SpellCheck.IsEnabled="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" AcceptsTab="True"  AcceptsReturn="True" Margin="0,5"/>
+            <Button Grid.Row="2"  Click="Add" Content="Ajouter" HorizontalAlignment="Right" />
+        </Grid>
+    </Border>
+</Window>

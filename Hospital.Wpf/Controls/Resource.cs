@@ -5,6 +5,18 @@ namespace Hospital.Wpf.Controls
 {
     public class Resource : ViewModelBase
     {
+        public Resource(PlanningEmployee planningEmployee)
+        {
+            var employee = planningEmployee.GetEmployee();
+            Id = employee.Id;
+            Name = employee.Name;
+            Job = employee.Job;
+            PhoneNumber = employee.PhoneNumber;
+            IsEditMode = false;
+            IsPresent = !planningEmployee.IsAbsent;
+            Comment = planningEmployee.Comment;
+        }
+
         public Resource(Employee employee)
         {
             Id = employee.Id;
@@ -12,7 +24,13 @@ namespace Hospital.Wpf.Controls
             Job = employee.Job;
             PhoneNumber = employee.PhoneNumber;
             IsEditMode = false;
-            IsPresent = !employee.IsAbsent;
+            IsPresent = true;
+        }
+
+        public string Comment
+        {
+            get => _comment;
+            set { _comment = value; RaisePropertyChanged(nameof(Comment));}
         }
 
         public int Id
@@ -63,6 +81,7 @@ namespace Hospital.Wpf.Controls
         }
 
         private string _phoneNumber;
+        private string _comment;
 
         public string PhoneNumber
 
@@ -92,9 +111,11 @@ namespace Hospital.Wpf.Controls
             IsEditMode = true;
         }
 
-        public Employee ToEmployee()
+        public PlanningEmployee ToEmployee()
         {
-            return new Employee(){Id = Id, Name = Name, Job = Job, IsAbsent = !IsPresent, PhoneNumber = PhoneNumber};
+            var employee = new Employee()
+                {Id = Id, Name = Name, Job = Job, PhoneNumber = PhoneNumber};
+            return new PlanningEmployee(employee){IsAbsent = !IsPresent, Comment = Comment};
         }
     }
 }
