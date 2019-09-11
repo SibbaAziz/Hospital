@@ -10,11 +10,16 @@
 
     <converters:JobToColorConverter x:Key="JobToColorConverter"/>
 
+    <Style TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Arial"></Setter>
+    </Style>
+
     <Style x:Key="ImageButton" TargetType="Button">
+        <Setter Property="Foreground" Value="#3c3c3c"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Border Background="Transparent" Padding="2">
+                    <Border Padding="2" Background="Transparent">
                         <Viewbox>
                             <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
                         </Viewbox>
@@ -22,6 +27,35 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#42a5f5"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="BackgroudButton" TargetType="Button">
+        <Setter Property="Background" Value="#42a5f5"></Setter>
+        <Setter Property="Foreground" Value="#3c3c3c"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" Padding="4">
+                        <Viewbox>
+                            <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
+                        </Viewbox>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="DarkBlue"></Setter>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="LightGray"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
  
     <Style x:Key="AbsentCheckbox" TargetType="CheckBox">

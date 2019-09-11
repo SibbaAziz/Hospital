@@ -21,7 +21,9 @@ namespace Hospital.Wpf
             unity.RegisterType<IMainWindowModel, MainWindowViewModel>();
 
             InjectContainer.RegisterView<PlanningView>(unity.Resolve<PlanningView>());
-            InjectContainer.RegisterView<Employees>(unity.Resolve<Employees>());
+            InjectContainer.RegisterView<ListOfEmployeesView>(unity.Resolve<ListOfEmployeesView>());
+            InjectContainer.RegisterView<AddEmployeeView>(unity.Resolve<AddEmployeeView>());
+            InjectContainer.RegisterView<EmployeesView>(unity.Resolve<EmployeesView>());
             InjectContainer.RegisterView<MainWindow>(unity.Resolve<MainWindow>());
             var mainWindow = unity.Resolve<AuthenticationWindow>(); // Creating Main window
 

@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="Hospital.Wpf.Views.AddEmployeeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Hospital.Wpf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}" x:Key="Txt">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+        </Style>
+        <Style TargetType="{x:Type Control}" x:Key="Content">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Grid.Column" Value="2"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Border Padding="10" Background="Transparent" HorizontalAlignment="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="332"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="3" Margin="10,4,0,4"   Grid.RowSpan="5" BorderThickness="1" BorderBrush="Gray"  Width="200">
+                <Grid>
+                    <Image   Source="../Images/userDefault1.png"/>
+                    <Button Content="{StaticResource AppbarCloudUpload}" Style="{StaticResource ImageButton}" Height="18" Width="32" HorizontalAlignment="Right" VerticalAlignment="Bottom"></Button>
+                </Grid>
+                
+            </Border>
+            <TextBlock Text="Nom" Grid.Row="0" Style="{StaticResource ResourceKey=Txt}" />
+            <TextBox Style="{StaticResource ResourceKey=Content}" />
+
+            <TextBlock Grid.Row="1" Text="Prénom"  Style="{StaticResource Txt}" />
+            <TextBox Grid.Row="1" Style="{StaticResource Content}" />
+
+
+            <TextBlock Grid.Row="2" Text="Email"  Style="{StaticResource Txt}" />
+            <TextBox  Grid.Row="2" Style="{StaticResource Content}" />
+
+
+            <TextBlock Grid.Row="3" Text="Poste"  Style="{StaticResource Txt}" />
+            <TextBox Grid.Row="3" Style="{StaticResource Content}"/>
+
+
+            <TextBlock Grid.Row="4" Text="Numero de téléphone"  Style="{StaticResource Txt}"/>
+            <TextBox Grid.Row="4" Style="{StaticResource Content}"/>
+
+            <TextBlock Grid.Row="5" Text="Numero de mobile"  Style="{StaticResource Txt}" />
+            <TextBox  Grid.Row="5" Style="{StaticResource Content}"/>
+
+            <TextBlock Grid.Row="6" Text="Service"  Style="{StaticResource Txt}" />
+            <ComboBox Grid.Row="6" Style="{StaticResource Content}"/>
+
+            <Button Grid.Row="8" Grid.Column="4" Width="100" Height="40" Style="{StaticResource BackgroudButton}" Content="{StaticResource AppbarSave}" VerticalAlignment="Bottom" ToolTip="Enregister" HorizontalAlignment="Right"></Button>
+
+        </Grid>
+    </Border>
+
+</UserControl>

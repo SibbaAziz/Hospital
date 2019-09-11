@@ -1,17 +1,46 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
+using Hospital.Wpf.IoC;
+using Hospital.Wpf.Views;
 
 namespace Hospital.Wpf.ViewModels
 {
-    public class EmployeesViewModel
+    public class EmployeesViewModel : ViewModelBase
     {
-        public List<Employee> Employees { get; set; }
+        private Control _content;
+        private Control ListOfEmployees => InjectContainer.ResolveView<ListOfEmployeesView>();
+        private Control AddView => InjectContainer.ResolveView<AddEmployeeView>();
 
-        public EmployeesViewModel(IRepository repository)
+        public ICommand AddCommand { get; set; }
+        public ICommand ShowCommand { get; set; }
+
+        public Control Content
         {
-            Employees = repository.GetEmployees().ToList();
+            get => _content;
+            set { _content = value;  RaisePropertyChanged(nameof(Content));}
+        }
+
+        public EmployeesViewModel()
+        {
+            AddCommand = new RelayCommand(Add);
+            ShowCommand = new RelayCommand(Show);
+            Content = ListOfEmployees;
+        }
+
+        private void Show()
+        {
+            Content = ListOfEmployees;
+        }
+
+        private void Add()
+        {
+            Content = AddView;
         }
     }
 }

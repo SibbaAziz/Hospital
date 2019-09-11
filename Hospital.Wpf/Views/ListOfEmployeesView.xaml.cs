@@ -5,17 +5,16 @@ using Unity;
 namespace Hospital.Wpf.Views
 {
     /// <summary>
-    /// Logique d'interaction pour Employees.xaml
+    /// Logique d'interaction pour ListOfEmployeesView.xaml
     /// </summary>
-    public partial class Employees : UserControl
+    public partial class ListOfEmployeesView : UserControl
     {
         [Dependency]
-        public EmployeesViewModel ViewModel
+        public ListOfEmployeesViewModel ViewModel
         {
             set => DataContext = value;
         }
-
-        public Employees()
+        public ListOfEmployeesView()
         {
             InitializeComponent();
         }

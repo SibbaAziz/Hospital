@@ -28,16 +28,29 @@ namespace Hospital.Wpf.Views
 
         private void Connecter(object sender, RoutedEventArgs e)
         {
+            Connect();
+        }
+
+        private void Connect()
+        {
             var window = InjectContainer.ResolveView<MainWindow>() as Window;
 
             if (AuthenticationService.Login(Login.Text, Password.Password))
             {
-                window.Show();
+                window?.Show();
                 Close();
             }
             else
             {
                 Error.Text = "Login ou mot de passe incorrect !";
+            }
+        }
+
+        private void Password_OnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Connect();
             }
         }
     }
