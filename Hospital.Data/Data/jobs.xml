@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArrayOfString>
+  <string>Directeur</string>
+  <string>Chef de service</string>
+  <string>Médecin Spécialiste</string>          
+  <string>Médecin généraliste</string>   
+  <string>Sage-femme</string>          
+  <string>Infirmier</string>          
+  <string>Technicien de surface</string>
+  <string>Agent de sécurité</string>    
+  <string>Secrétaire</string>          
+  <string>Administrateur</string>      
+  <string>Agent technique</string>     
+  <string>Agent administratif</string> 
+  <string>Agent d’hygiène</string>     
+</ArrayOfString>

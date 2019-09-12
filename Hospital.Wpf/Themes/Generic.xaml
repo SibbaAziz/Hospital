@@ -35,11 +35,11 @@
     </Style>
 
     <Style x:Key="BackgroudButton" TargetType="Button">
-        <Setter Property="Background" Value="#42a5f5"></Setter>
-        <Setter Property="Foreground" Value="#3c3c3c"></Setter>
+        <Setter Property="Background" Value="#1e88e5"></Setter>
+        <Setter Property="Foreground" Value="#FF474646"></Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
+                <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" Padding="4">
                         <Viewbox>
                             <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
@@ -50,10 +50,13 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="DarkBlue"></Setter>
+                <Setter Property="Foreground" Value="White"></Setter>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="LightGray"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#795548"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

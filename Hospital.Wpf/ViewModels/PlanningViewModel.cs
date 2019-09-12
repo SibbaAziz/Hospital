@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Hospital.Caching;
 using Hospital.Core.Helpers;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
@@ -22,11 +23,7 @@ namespace Hospital.Wpf.ViewModels
             set { _isEdited = value; RaisePropertyChanged(nameof(IsEdited));}
         }
 
-        public List<Department> Departments
-        {
-            get => _departments;
-            set { _departments = value; RaisePropertyChanged(nameof(Departments)); }
-        }
+        
 
         public Department SelectedDepartment
         {
@@ -71,7 +68,7 @@ namespace Hospital.Wpf.ViewModels
             _repository = repository;
             CreateCommand = new RelayCommand<PlaningControl>(Create, (c) => SelectedService != null);
             ValidateCommand = new RelayCommand<PlaningControl>(Validate);
-            Departments = repository.GetDepartments().ToList();
+            Services = CacheContext.GetServices().ToList();
         }
 
         private void Validate(PlaningControl planingControl)

@@ -23,12 +23,10 @@
                     <DatePicker Margin="0,2" SelectedDate="{Binding ElementName=PlaningControl, Path=StartDate}"></DatePicker>
                     <TextBlock  Text="  Au : " Foreground="White" VerticalAlignment="Center"></TextBlock>
                     <DatePicker Margin="0,2" SelectedDate="{Binding ElementName=PlaningControl, Path=EndDate}"></DatePicker>
-                    <TextBlock Margin="0,2" Text="  Département  " Foreground="White" VerticalAlignment="Center" />
-                    <ComboBox Margin="0,2" ItemsSource="{Binding Departments}" SelectedItem="{Binding SelectedDepartment}" Width="200" VerticalAlignment="Center" DisplayMemberPath="Name"/>
                     <TextBlock Margin="0,2" Text="  Service  " Foreground="White" VerticalAlignment="Center" />
                     <ComboBox Margin="0,2" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Width="200" VerticalAlignment="Center" DisplayMemberPath="Name"/>
                 </WrapPanel>
-                <Button Grid.Column="1" Width="40" HorizontalAlignment="Right" VerticalAlignment="Center" Content="{StaticResource AppbarDrawPixelGrid}" Command="{Binding CreateCommand}" CommandParameter="{Binding ElementName=PlaningControl}"  Style="{StaticResource BackgroudButton}"/>
+                <Button Grid.Column="1" Width="40" HorizontalAlignment="Right" VerticalAlignment="Center" Content="{StaticResource AppbarGo}" Command="{Binding CreateCommand}" CommandParameter="{Binding ElementName=PlaningControl}"  Style="{StaticResource BackgroudButton}"/>
             </Grid>
 
         </Border>

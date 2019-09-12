@@ -56,5 +56,15 @@ namespace Hospital.Data.Repositories
         {
             throw new System.NotImplementedException();
         }
+
+        public bool SaveEmployee(int serviceId, Employee employee)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IList<string> GetJobs()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

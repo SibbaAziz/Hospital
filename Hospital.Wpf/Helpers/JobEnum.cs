@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 
 namespace Hospital.Wpf.Helpers
 {
@@ -41,14 +42,28 @@ namespace Hospital.Wpf.Helpers
     {
         [Description("Directeur")]
         Directeur,
+        [Description("Chef de service")]
+        ChefDeService,
         [Description("Médecin Spécialiste")]
         MedecinSpecialiste,
         [Description("Médecin généraliste")]
         MedecinGeneraliste,
         [Description("Sage-femme")]
         SageFemme,
+        [Description("Infirmier")]
+        Infirmier,
         [Description("Technicien de surface")]
         TechnicienDeSurface,
+        [Description("Agent de sécurité")]
+        AgentDeSecurite,
+        [Description("Secrétaire")]
+        Secretaire,
+        [Description("Administrateur")]
+        Administrateur,
+        [Description("Agent technique")]
+        AgentTechnique,
+        [Description("Agent administratif")]
+        AgentAdministratif,
         [Description("Agent d’hygiène")]
         AgentHygiene
     } 

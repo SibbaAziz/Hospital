@@ -2,10 +2,10 @@
 <ArrayOfService>
   <Service>
     <Id>1</Id>
-    <Name>Surveillance Générale</Name>
+    <Name>Consultation Externe de Gynécologie</Name>
   </Service>
   <Service>
     <Id>2</Id>
-    <Name>Hospitalisation Gynéco-obstétrique</Name>
+    <Name>Bloc de Chirurgie Gynécologique</Name>
   </Service>
 </ArrayOfService>

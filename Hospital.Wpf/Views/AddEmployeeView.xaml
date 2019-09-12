@@ -39,36 +39,36 @@
 
             <Border Grid.Column="3" Margin="10,4,0,4"   Grid.RowSpan="5" BorderThickness="1" BorderBrush="Gray"  Width="200">
                 <Grid>
-                    <Image   Source="../Images/userDefault1.png"/>
+                    <Image   Source="../Images/userDefault.png"/>
                     <Button Content="{StaticResource AppbarCloudUpload}" Style="{StaticResource ImageButton}" Height="18" Width="32" HorizontalAlignment="Right" VerticalAlignment="Bottom"></Button>
                 </Grid>
                 
             </Border>
-            <TextBlock Text="Nom" Grid.Row="0" Style="{StaticResource ResourceKey=Txt}" />
-            <TextBox Style="{StaticResource ResourceKey=Content}" />
+            <TextBlock Text="Nom"  Grid.Row="0" Style="{StaticResource ResourceKey=Txt}" />
+            <TextBox Style="{StaticResource ResourceKey=Content}" Text="{Binding FirstName}" />
 
             <TextBlock Grid.Row="1" Text="Prénom"  Style="{StaticResource Txt}" />
-            <TextBox Grid.Row="1" Style="{StaticResource Content}" />
+            <TextBox Grid.Row="1" Style="{StaticResource Content}"  Text="{Binding LastName}"/>
 
 
             <TextBlock Grid.Row="2" Text="Email"  Style="{StaticResource Txt}" />
-            <TextBox  Grid.Row="2" Style="{StaticResource Content}" />
+            <TextBox  Grid.Row="2" Style="{StaticResource Content}" Text="{Binding Email}"/>
 
 
             <TextBlock Grid.Row="3" Text="Poste"  Style="{StaticResource Txt}" />
-            <TextBox Grid.Row="3" Style="{StaticResource Content}"/>
+            <ComboBox ItemsSource="{Binding Jobs}" SelectedItem="{Binding SelectedJob}" Grid.Row="3" Style="{StaticResource Content}"/>
 
 
             <TextBlock Grid.Row="4" Text="Numero de téléphone"  Style="{StaticResource Txt}"/>
-            <TextBox Grid.Row="4" Style="{StaticResource Content}"/>
+            <TextBox Grid.Row="4" Style="{StaticResource Content}" Text="{Binding PhoneNumber}" />
 
             <TextBlock Grid.Row="5" Text="Numero de mobile"  Style="{StaticResource Txt}" />
-            <TextBox  Grid.Row="5" Style="{StaticResource Content}"/>
+            <TextBox  Grid.Row="5" Style="{StaticResource Content}" Text="{Binding MobileNumber}"/>
 
             <TextBlock Grid.Row="6" Text="Service"  Style="{StaticResource Txt}" />
-            <ComboBox Grid.Row="6" Style="{StaticResource Content}"/>
+            <ComboBox Grid.Row="6" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}"  DisplayMemberPath="Name" Style="{StaticResource Content}"/>
 
-            <Button Grid.Row="8" Grid.Column="4" Width="100" Height="40" Style="{StaticResource BackgroudButton}" Content="{StaticResource AppbarSave}" VerticalAlignment="Bottom" ToolTip="Enregister" HorizontalAlignment="Right"></Button>
+            <Button Grid.Row="8" Grid.Column="4" Width="100" Height="40" Style="{StaticResource BackgroudButton}" Content="{StaticResource AppbarSave}" VerticalAlignment="Bottom" ToolTip="Enregister" Command="{Binding SaveCommand}" HorizontalAlignment="Right"></Button>
 
         </Grid>
     </Border>

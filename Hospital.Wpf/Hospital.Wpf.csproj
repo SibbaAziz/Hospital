@@ -325,6 +325,10 @@
       <Project>{e2f18b52-9815-4e87-86d2-c94d3c454ba3}</Project>
       <Name>Hospital.Authentication</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Hospital.Caching\Hospital.Caching.csproj">
+      <Project>{C8D13586-1549-4963-AB52-C6E79C9A72FE}</Project>
+      <Name>Hospital.Caching</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hospital.Core\Hospital.Core.csproj">
       <Project>{c792bd4b-58c3-4122-87d9-2edd92a35876}</Project>
       <Name>Hospital.Core</Name>
@@ -333,9 +337,6 @@
       <Project>{29A70AAD-BE99-4384-8E5B-E76997A5BE70}</Project>
       <Name>Hospital.Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\userDefault1.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\userDefault.png" />
