@@ -81,7 +81,7 @@ namespace Hospital.Wpf.ViewModels
         {
               var  employee = new Employee
                 {
-                    Id = _employee.Id == 0 ? new Random().Next(0, int.MaxValue) : _employee.Id,
+                    Id = _employee?.Id == default ? new Random().Next(0, int.MaxValue) : _employee.Id,
                     Name = $"{LastName} {FirstName}",
                     Email = Email,
                     Job = SelectedJob,
