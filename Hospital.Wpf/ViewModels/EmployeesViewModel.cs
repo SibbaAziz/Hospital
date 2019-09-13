@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
+using Hospital.Wpf.Helpers;
 using Hospital.Wpf.IoC;
 using Hospital.Wpf.Views;
 
@@ -31,6 +32,11 @@ namespace Hospital.Wpf.ViewModels
             AddCommand = new RelayCommand(Add);
             ShowCommand = new RelayCommand(Show);
             Content = ListOfEmployees;
+            Mediator.Instance.Register((a) => 
+            {
+                Content = AddView;
+                Mediator.Instance.NotifyColleagues(ViewModelMessages.AskToEditEmployee, a);
+            }, ViewModelMessages.OpenEmployeeEdit);
         }
 
         private void Show()

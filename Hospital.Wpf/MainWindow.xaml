@@ -13,6 +13,7 @@
             <TabItem Header="Planning"  Content="{Binding PlanningView}"/>
             <TabItem Header="Paie"/>
             <TabItem Header="Personel" Content="{Binding Employees}"/>
+            <TabItem Header="Utilisateurs" />
         </TabControl>
         
     </Border>

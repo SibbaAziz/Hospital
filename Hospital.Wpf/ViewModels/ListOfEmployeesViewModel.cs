@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
+using Hospital.Wpf.Helpers;
 
 namespace Hospital.Wpf.ViewModels
 {
@@ -12,6 +13,7 @@ namespace Hospital.Wpf.ViewModels
     {
         private readonly IRepository _repository;
         private List<Employee> _employees;
+        public ICommand EditCommand { get; set; }
 
         public List<Employee> Employees
         {
@@ -24,8 +26,14 @@ namespace Hospital.Wpf.ViewModels
         public ListOfEmployeesViewModel(IRepository repository)
         {
             _repository = repository;
+            EditCommand = new RelayCommand<Employee>(Edit);
             RefreshCommand = new RelayCommand(Refresh);
             Employees = repository.GetEmployees().ToList();
+        }
+
+        private void Edit(Employee employee)
+        {
+            Mediator.Instance.NotifyColleagues(ViewModelMessages.OpenEmployeeEdit, employee);
         }
 
         private void Refresh()

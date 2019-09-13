@@ -13,7 +13,24 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Content="{StaticResource AppbarRefresh}" Style="{StaticResource BackgroudButton}"  Height="30" VerticalAlignment="Top" Command="{Binding RefreshCommand}"></Button>
-            <DataGrid ItemsSource="{Binding Employees}" Grid.Column="1"></DataGrid>
+            <DataGrid ItemsSource="{Binding Employees}" Grid.Column="1" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Nom Prénom" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="Poste" Binding="{Binding Job}"/>
+                    <DataGridTextColumn Header="Numéro de télephone" Binding="{Binding PhoneNumber}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Button Content="Modifier" Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate> 
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Border>
 </UserControl>

@@ -223,6 +223,7 @@
     <Compile Include="Converters\JobToColorConverter.cs" />
     <Compile Include="Helpers\EnumerableExtension.cs" />
     <Compile Include="Helpers\JobEnum.cs" />
+    <Compile Include="Helpers\Mediator.cs" />
     <Compile Include="IoC\InjectContainer.cs" />
     <Compile Include="ViewModels\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />

@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Hospital.Caching;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
+using Hospital.Wpf.Helpers;
 
 namespace Hospital.Wpf.ViewModels
 {
@@ -20,6 +21,7 @@ namespace Hospital.Wpf.ViewModels
         private string _mobileNumber;
         public List<Service> Services { get; set; }
         public Service SelectedService { get; set; }
+        private Employee _employee;
 
         public List<string> Jobs { get; set; }
         public string SelectedJob { get; set; }
@@ -64,18 +66,28 @@ namespace Hospital.Wpf.ViewModels
             SaveCommand = new RelayCommand(Save, () => CanSave);
             Services = CacheContext.GetServices().ToList();
             Jobs = CacheContext.GetJobs().ToList();
+            Mediator.Instance.Register((e) => 
+            {
+                _employee = (Employee)e;
+                FirstName = _employee.Name;
+                Email = _employee.Email;
+                SelectedJob = _employee.Job;
+                PhoneNumber = _employee.PhoneNumber;
+                
+            }, ViewModelMessages.AskToEditEmployee);
         }
 
         private void Save()
         {
-            var employee = new Employee
-            {
-                Id = new Random().Next(0, int.MaxValue),
-                Name = $"{LastName} {FirstName}",
-                Email = Email,
-                Job = SelectedJob,
-                PhoneNumber = PhoneNumber
-            };
+              var  employee = new Employee
+                {
+                    Id = _employee.Id == 0 ? new Random().Next(0, int.MaxValue) : _employee.Id,
+                    Name = $"{LastName} {FirstName}",
+                    Email = Email,
+                    Job = SelectedJob,
+                    PhoneNumber = PhoneNumber
+                };
+            
 
             _repository.SaveEmployee(SelectedService.Id, employee);
             FirstName = string.Empty;
