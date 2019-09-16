@@ -22,7 +22,13 @@ namespace Hospital.Data.DataExporters
                 Mobile = e.Employee.PhoneNumber
             })).ToArray();
 
-            using (var excel = new ExcelPackage(new FileInfo(@"c:\workbooks\myworkbook.xlsx")))
+            var directory = @"c:\workbooks";
+
+
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+
+            using (var excel = new ExcelPackage(new FileInfo(Path.Combine(directory, "myworkbook.xlsx"))))
             {
                 var workSheet = excel.Workbook.Worksheets.Add("Sheet1");
                 workSheet.Cells.LoadFromCollection(data, true).AutoFitColumns();
