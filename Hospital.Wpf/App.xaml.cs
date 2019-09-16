@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using Hospital.Caching;
+using Hospital.Core.Exporters;
 using Hospital.Core.Repository;
+using Hospital.Data.DataExporters;
 using Hospital.Data.Repositories;
 using Hospital.Wpf.IoC;
 using Hospital.Wpf.ViewModels;
@@ -21,6 +23,7 @@ namespace Hospital.Wpf
             unity.RegisterType<IRepository, MemoryRepository>();
             CacheContext.SetRepository(unity.Resolve<IRepository>());
             unity.RegisterType<IMainWindowModel, MainWindowViewModel>();
+            unity.RegisterType<IDataExporter, ExcelDataExporter>();
 
             InjectContainer.RegisterView<PlanningView>(unity.Resolve<PlanningView>());
             InjectContainer.RegisterView<ListOfEmployeesView>(unity.Resolve<ListOfEmployeesView>());

@@ -4,10 +4,12 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Hospital.Caching;
+using Hospital.Core.Exporters;
 using Hospital.Core.Helpers;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
 using Hospital.Wpf.Controls;
+using Unity;
 
 namespace Hospital.Wpf.ViewModels
 {
@@ -16,6 +18,10 @@ namespace Hospital.Wpf.ViewModels
         private readonly IRepository _repository;
 
         public ICommand ValidateCommand { get; set; }
+        public ICommand ExportToExcelCommand { get; set; }
+
+        [Dependency]
+        public IDataExporter DataExporter { get; set; }
 
         public bool IsEdited
         {
@@ -69,8 +75,9 @@ namespace Hospital.Wpf.ViewModels
             CreateCommand = new RelayCommand<PlaningControl>(Create, (c) => SelectedService != null);
             ValidateCommand = new RelayCommand<PlaningControl>(Validate);
             Services = CacheContext.GetServices().ToList();
+            ExportToExcelCommand = new RelayCommand<PlaningControl>(ExportToExcel);
         }
-
+                
         private void Validate(PlaningControl planingControl)
         {
             var planning = planingControl.Validate();
@@ -86,6 +93,12 @@ namespace Hospital.Wpf.ViewModels
                 new DateRange(planingControl.StartDate, planingControl.EndDate))?.ToList();
 
             planingControl.ExecuteCommand.Execute(SelectedService);
+        }
+
+        private void ExportToExcel(PlaningControl planningControl)
+        {
+            var planning = planningControl.Validate();
+            DataExporter.Export(planning);
         }
     }
 }

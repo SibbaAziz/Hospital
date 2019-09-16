@@ -72,8 +72,20 @@ namespace Hospital.Data.Repositories
                 services.Add(service);
             }
 
-            service.Employees.Add(employee);
+            var exit = service.Employees.FirstOrDefault(e => e.Id == employee.Id);
 
+            if(exit == null)
+            {
+                service.Employees.Add(employee);
+            }
+            else
+            {
+                exit.Email = employee.Email;
+                exit.Job = employee.Job;
+                exit.Name = employee.Name;
+                exit.PhoneNumber = employee.PhoneNumber;
+            }
+            
             // Create an XmlTextWriter using a FileStream.
             
             using (Stream fs = new FileStream("Data/services.xml", FileMode.Create))
@@ -119,15 +131,7 @@ namespace Hospital.Data.Repositories
                 services = (List<Service>)serializer.Deserialize(reader);
             }
 
-            return services;
-            //var employees = GetEmployees();
-            //var service = new Service { Id = 1, Name = "Consultation Externe de Gynécologie", Manager = employees[0], Employees = new List<Employee> { employees[1], employees[2], employees[3], employees[4] } };
-            //var service2 = new Service() { Id = 2, Name = "Bloc de Chirurgie Gynécologique", Manager = employees[0], Employees = new List<Employee> { employees[5], employees[6] } };
-
-            //return new List<Service>()
-            //{
-            //    service, service2
-            //};
+            return services;            
         }
 
         public IList<PlanningUnit> GetPlanningUnit(int serviceId, DateRange dateRange)
