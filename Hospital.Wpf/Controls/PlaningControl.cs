@@ -29,6 +29,7 @@ namespace Hospital.Wpf.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PlaningControl), new FrameworkPropertyMetadata(typeof(PlaningControl)));
         }
+
         public PlaningControl()
         {
             ExecuteCommand = new RelayCommand<Service>(Execute);

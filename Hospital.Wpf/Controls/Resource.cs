@@ -12,9 +12,16 @@ namespace Hospital.Wpf.Controls
             Name = employee.Name;
             Job = employee.Job;
             PhoneNumber = employee.PhoneNumber;
+            Email = employee.Email;
             IsEditMode = false;
             IsPresent = !planningEmployee.IsAbsent;
             Comment = planningEmployee.Comment;
+        }
+
+        public string Email
+        {
+            get => _email;
+            set { _email = value; RaisePropertyChanged(nameof(Email)); }
         }
 
         public Resource(Employee employee)
@@ -23,6 +30,7 @@ namespace Hospital.Wpf.Controls
             Name = employee.Name;
             Job = employee.Job;
             PhoneNumber = employee.PhoneNumber;
+            Email = employee.Email;
             IsEditMode = false;
             IsPresent = true;
         }
@@ -48,6 +56,7 @@ namespace Hospital.Wpf.Controls
         private string _job;
         private int _id;
         private bool _isPresent;
+        private string _email;
 
         public string Name
         {
@@ -114,7 +123,7 @@ namespace Hospital.Wpf.Controls
         public PlanningEmployee ToEmployee()
         {
             var employee = new Employee()
-                {Id = Id, Name = Name, Job = Job, PhoneNumber = PhoneNumber};
+                {Id = Id, Name = Name, Job = Job, PhoneNumber = PhoneNumber, Email = Email};
             return new PlanningEmployee(employee){IsAbsent = !IsPresent, Comment = Comment};
         }
     }

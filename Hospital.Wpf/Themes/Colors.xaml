@@ -4,7 +4,7 @@
     <Color x:Key="Color1">#3722f6</Color>
     <Color x:Key="Color2">#b39afd</Color>
     <Color x:Key="Color3">#FFD54F</Color>
-    <Color x:Key="BackgroudColor">#FFF0F0F0</Color>
+    <Color x:Key="BackgroudColor">White</Color>
     <SolidColorBrush x:Key="Brush1" Color="{StaticResource Color1}"/>
     <SolidColorBrush x:Key="Brush2" Color="{StaticResource Color2}"/>
     <SolidColorBrush x:Key="Brush3" Color="{StaticResource Color3}"/>

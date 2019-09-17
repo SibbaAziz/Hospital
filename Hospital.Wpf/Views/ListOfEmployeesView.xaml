@@ -24,7 +24,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <Button Content="Modifier" Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}"/>
+                                    <Button Content="{StaticResource AppbarEdit}" Style="{StaticResource ImageButton}" Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate> 

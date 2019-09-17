@@ -78,6 +78,7 @@ namespace Hospital.Wpf.Controls
                 edit.IsEditMode = resource.IsEditMode;
                 edit.PhoneNumber = resource.PhoneNumber;
                 edit.IsPresent = resource.IsPresent;
+                edit.Email = resource.Email;
             }
 
             _tobeEdited = null;

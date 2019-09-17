@@ -30,7 +30,7 @@
             </Grid>
 
         </Border>
-        <Border Background="#FFF0F0F0" Grid.Row="1" Padding="5">
+        <Border Background="{StaticResource BackgroundBrush}" Grid.Row="1">
             <controls:PlaningControl x:Name="PlaningControl" ResourceItems="{Binding Resources}" />
         </Border>
         <StackPanel Grid.Row="2" Margin="0,5,0,0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">

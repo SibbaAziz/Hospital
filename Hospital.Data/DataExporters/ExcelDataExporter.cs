@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Hospital.Core.Exporters;
@@ -14,26 +15,31 @@ namespace Hospital.Data.DataExporters
         {
             var data = planningUnit.SelectMany(p => p.Employees.Select(e => new
             {
-                Date = p.Date,
+                Date = p.Date.ToString("dd/MM/yyyy"),
                 Nom = e.Employee.Name,
                 Poste = e.Employee.Job,
                 Absence = e.IsAbsent,
                 Email = e.Employee.Email,
+                Periode = p.DayNight == Core.Helpers.DayNight.Day ? "Jour" : "Nuit",
                 Mobile = e.Employee.PhoneNumber
             })).ToArray();
 
             var directory = @"c:\workbooks";
-
+            var filename = $"planning_{DateTime.Now.ToString("ddMMyyyyhhmm")}.xlsx";
 
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
 
-            using (var excel = new ExcelPackage(new FileInfo(Path.Combine(directory, "myworkbook.xlsx"))))
+            var fullfilename = Path.Combine(directory, filename);
+
+            using (var excel = new ExcelPackage(new FileInfo(fullfilename)))
             {
-                var workSheet = excel.Workbook.Worksheets.Add("Sheet1");
+                var workSheet = excel.Workbook.Worksheets.Add("Planning");
                 workSheet.Cells.LoadFromCollection(data, true).AutoFitColumns();
                 excel.Save();
             }
+
+            Process.Start(fullfilename);
         }
     }
 }
