@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hospital.Wpf.Views"
+             xmlns:Controls="clr-namespace:Hospital.Wpf.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        
         <Style TargetType="{x:Type TextBlock}" x:Key="Txt">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontFamily" Value="Arial"/>
@@ -51,24 +53,24 @@
             <TextBox Grid.Row="1" Style="{StaticResource Content}"  Text="{Binding LastName}"/>-->
 
 
-            <TextBlock Grid.Row="2" Text="Email"  Style="{StaticResource Txt}" />
-            <TextBox  Grid.Row="2" Style="{StaticResource Content}" Text="{Binding Email}"/>
+            <TextBlock Grid.Row="1" Text="Email"  Style="{StaticResource Txt}" />
+            <TextBox  Grid.Row="1" Style="{StaticResource Content}" Text="{Binding Email}"/>
 
 
-            <TextBlock Grid.Row="3" Text="Poste"  Style="{StaticResource Txt}" />
-            <ComboBox ItemsSource="{Binding Jobs}" SelectedItem="{Binding SelectedJob}" Grid.Row="3" Style="{StaticResource Content}"/>
+            <TextBlock Grid.Row="2" Text="Poste"  Style="{StaticResource Txt}" />
+            <ComboBox ItemsSource="{Binding Jobs}" SelectedItem="{Binding SelectedJob}" Grid.Row="2" Style="{StaticResource Content}"/>
 
 
-            <TextBlock Grid.Row="4" Text="Numero de téléphone"  Style="{StaticResource Txt}"/>
-            <TextBox Grid.Row="4" Style="{StaticResource Content}" Text="{Binding PhoneNumber}" />
+            <TextBlock Grid.Row="3" Text="Numero de téléphone"  Style="{StaticResource Txt}"/>
+            <TextBox Grid.Row="3" Style="{StaticResource Content}" Text="{Binding PhoneNumber}" />
 
-            <TextBlock Grid.Row="5" Text="Numero de mobile"  Style="{StaticResource Txt}" />
-            <TextBox  Grid.Row="5" Style="{StaticResource Content}" Text="{Binding MobileNumber}"/>
+            <TextBlock Grid.Row="4" Text="Numero de mobile"  Style="{StaticResource Txt}" />
+            <TextBox  Grid.Row="4" Style="{StaticResource Content}" Text="{Binding MobileNumber}"/>
 
-            <TextBlock Grid.Row="6" Text="Service"  Style="{StaticResource Txt}" />
-            <ComboBox Grid.Row="6" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}"  DisplayMemberPath="Name" Style="{StaticResource Content}"/>
+            <TextBlock Grid.Row="5" Text="Service"  Style="{StaticResource Txt}" />
+            <ComboBox Grid.Row="5" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}"  DisplayMemberPath="Name" Style="{StaticResource Content}"/>
 
-            <Button Grid.Row="8" Grid.Column="4" Width="100" Height="40" Style="{StaticResource BackgroudButton}" Content="{StaticResource AppbarSave}" VerticalAlignment="Bottom" ToolTip="Enregister" Command="{Binding SaveCommand}" HorizontalAlignment="Right"></Button>
+            <Controls:IconButton Icon="{DynamicResource AppbarSave}" Grid.Row="7" Grid.Column="4"  Height="40" Content="Enregistrer" VerticalAlignment="Bottom" ToolTip="Enregister" Command="{Binding SaveCommand}" HorizontalAlignment="Right"/>
 
         </Grid>
     </Border>

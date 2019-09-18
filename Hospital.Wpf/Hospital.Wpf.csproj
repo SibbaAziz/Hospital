@@ -223,6 +223,7 @@
     <Compile Include="CommentDialog.xaml.cs">
       <DependentUpon>CommentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IconButton.cs" />
     <Compile Include="Controls\ListEditorControl.cs" />
     <Compile Include="Controls\PlaningControl.cs" />
     <Compile Include="Controls\Resource.cs" />
