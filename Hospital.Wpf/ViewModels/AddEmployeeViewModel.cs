@@ -8,6 +8,7 @@ using Hospital.Caching;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
 using Hospital.Wpf.Helpers;
+using Notifications.Wpf;
 
 namespace Hospital.Wpf.ViewModels
 {
@@ -102,6 +103,13 @@ namespace Hospital.Wpf.ViewModels
             
 
             _repository.SaveEmployee(SelectedService.Id, employee);
+            var notification = new NotificationManager();
+            notification.Show(new NotificationContent
+            {
+                Title = $"{employee.Name}",
+                Message = $"Employée {employee.Name} ajouté avec succès",
+                Type = NotificationType.Success
+            });
             Name = string.Empty;
             Email = string.Empty;
             PhoneNumber = string.Empty;
