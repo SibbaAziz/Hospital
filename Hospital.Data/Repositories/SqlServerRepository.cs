@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Hospital.Core.Helpers;
 using Hospital.Core.Models;
@@ -57,7 +58,7 @@ namespace Hospital.Data.Repositories
             throw new System.NotImplementedException();
         }
 
-        public bool SaveEmployee(int serviceId, Employee employee)
+        public Task<bool> SaveEmployee(int serviceId, Employee employee)
         {
             throw new System.NotImplementedException();
         }

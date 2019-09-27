@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using Hospital.Core.Helpers;
@@ -49,53 +51,57 @@ namespace Hospital.Data.Repositories
 
         }
 
-        public bool SaveEmployee(int serviceId, Employee employee)
+        public async Task<bool> SaveEmployee(int serviceId, Employee employee)
         {
-            List<Service> services;
-            // Create an instance of the XmlSerializer.
-            XmlSerializer serializer =
-                new XmlSerializer(typeof(List<Service>));
-
-            // Declare an object variable of the type to be deserialized.
-
-            using (Stream reader = new FileStream("Data/services.xml", FileMode.Open))
+            return await Task.Factory.StartNew(() =>
             {
-                // Call the Deserialize method to restore the object's state.
-                services = (List<Service>)serializer.Deserialize(reader);
-            }
+                Thread.Sleep(10000);
+                List<Service> services;
+                // Create an instance of the XmlSerializer.
+                XmlSerializer serializer =
+                    new XmlSerializer(typeof(List<Service>));
 
-            var service = services.FirstOrDefault(s => s.Id == serviceId);
+                // Declare an object variable of the type to be deserialized.
 
-            if (service == null)
-            {
-                service = GetServices().FirstOrDefault(s => s.Id == serviceId);
-                services.Add(service);
-            }
-
-            var exit = service.Employees.FirstOrDefault(e => e.Id == employee.Id);
-
-            if(exit == null)
-            {
-                service.Employees.Add(employee);
-            }
-            else
-            {
-                exit.Email = employee.Email;
-                exit.Job = employee.Job;
-                exit.Name = employee.Name;
-                exit.PhoneNumber = employee.PhoneNumber;
-            }
-            
-            // Create an XmlTextWriter using a FileStream.
-            
-            using (Stream fs = new FileStream("Data/services.xml", FileMode.Create))
-            {
-                using (XmlWriter writer = new XmlTextWriter(fs, Encoding.Unicode))
+                using (Stream reader = new FileStream("Data/services.xml", FileMode.Open))
                 {
-                    serializer.Serialize(writer, services);
+                    // Call the Deserialize method to restore the object's state.
+                    services = (List<Service>)serializer.Deserialize(reader);
                 }
-            }
-            return true;
+
+                var service = services.FirstOrDefault(s => s.Id == serviceId);
+
+                if (service == null)
+                {
+                    service = GetServices().FirstOrDefault(s => s.Id == serviceId);
+                    services.Add(service);
+                }
+
+                var exit = service.Employees.FirstOrDefault(e => e.Id == employee.Id);
+
+                if (exit == null)
+                {
+                    service.Employees.Add(employee);
+                }
+                else
+                {
+                    exit.Email = employee.Email;
+                    exit.Job = employee.Job;
+                    exit.Name = employee.Name;
+                    exit.PhoneNumber = employee.PhoneNumber;
+                }
+
+                // Create an XmlTextWriter using a FileStream.
+
+                using (Stream fs = new FileStream("Data/services.xml", FileMode.Create))
+                {
+                    using (XmlWriter writer = new XmlTextWriter(fs, Encoding.Unicode))
+                    {
+                        serializer.Serialize(writer, services);
+                    }
+                }
+                return true;
+            }).ConfigureAwait(false);
         }
 
         public IList<string> GetJobs()

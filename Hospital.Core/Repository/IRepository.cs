@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Hospital.Core.Helpers;
 using Hospital.Core.Models;
 
@@ -12,7 +13,7 @@ namespace Hospital.Core.Repository
         IList<Service> GetServices();
         IList<PlanningUnit> GetPlanningUnit(int serviceId, DateRange dateRange);
         bool SavePlanning(int serviceId, IEnumerable<PlanningUnit> planningUnits);
-        bool SaveEmployee(int serviceId, Employee employee);
+        Task<bool> SaveEmployee(int serviceId, Employee employee);
         IList<string> GetJobs();
     }
 }

@@ -70,8 +70,8 @@
             <TextBlock Grid.Row="5" Text="Service"  Style="{StaticResource Txt}" />
             <ComboBox Grid.Row="5" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}"  DisplayMemberPath="Name" Style="{StaticResource Content}"/>
 
-            <Controls:IconButton Icon="{DynamicResource AppbarSave}" Grid.Row="7" Grid.Column="4"  Height="40" Content="Enregistrer" VerticalAlignment="Bottom" ToolTip="Enregister" Command="{Binding SaveCommand}" HorizontalAlignment="Right"/>
-
+            <Controls:IconButton Icon="{DynamicResource AppbarSave}" Grid.Row="7" IsLoading="True" Grid.Column="4"  Height="40" Content="Enregistrer" VerticalAlignment="Bottom" ToolTip="Enregister" Command="{Binding SaveCommand}" HorizontalAlignment="Right" />
+            
         </Grid>
     </Border>
 

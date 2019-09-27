@@ -46,30 +46,30 @@ namespace Hospital.Wpf.ViewModels
 
         public ICommand SaveCommand { get; set; }
 
-        public bool CanSave => !string.IsNullOrEmpty(Name);
+        public bool CanSave => !string.IsNullOrEmpty(Name) && SelectedService != null && ! string.IsNullOrEmpty(SelectedJob);
 
         public string Name
         {
             get => _name;
-            set { _name = value; RaisePropertyChanged(nameof(Name));}
+            set { _name = value; RaisePropertyChanged(nameof(Name)); }
         }
-                
+
         public string Email
         {
             get => _email;
-            set { _email = value; RaisePropertyChanged(nameof(Email));}
+            set { _email = value; RaisePropertyChanged(nameof(Email)); }
         }
 
         public string PhoneNumber
         {
             get => _phoneNumber;
-            set { _phoneNumber = value; RaisePropertyChanged(nameof(PhoneNumber));}
+            set { _phoneNumber = value; RaisePropertyChanged(nameof(PhoneNumber)); }
         }
 
         public string MobileNumber
         {
             get => _mobileNumber;
-            set { _mobileNumber = value; RaisePropertyChanged(nameof(MobileNumber));}
+            set { _mobileNumber = value; RaisePropertyChanged(nameof(MobileNumber)); }
         }
 
         public AddEmployeeViewModel(IRepository repository)
@@ -78,7 +78,7 @@ namespace Hospital.Wpf.ViewModels
             SaveCommand = new RelayCommand(Save, () => CanSave);
             Services = CacheContext.GetServices().ToList();
             Jobs = CacheContext.GetJobs().ToList();
-            Mediator.Instance.Register((e) => 
+            Mediator.Instance.Register((e) =>
             {
                 _employee = (Employee)e;
                 Name = _employee.Name;
@@ -90,30 +90,43 @@ namespace Hospital.Wpf.ViewModels
             }, ViewModelMessages.AskToEditEmployee);
         }
 
-        private void Save()
+        private async void Save()
         {
-              var  employee = new Employee
-                {
-                    Id = _employee?.Id == default ? new Random().Next(0, int.MaxValue) : _employee.Id,
-                    Name = $"{Name}",
-                    Email = Email,
-                    Job = SelectedJob,
-                    PhoneNumber = PhoneNumber
-                };
             
-
-            _repository.SaveEmployee(SelectedService.Id, employee);
-            var notification = new NotificationManager();
-            notification.Show(new NotificationContent
+            var edit = _employee?.Id != default;
+            var employee = new Employee
             {
-                Title = $"{employee.Name}",
-                Message = $"Employée {employee.Name} ajouté avec succès",
-                Type = NotificationType.Success
-            });
+                Id = _employee?.Id == default ? new Random().Next(0, int.MaxValue) : _employee.Id,
+                Name = $"{Name}",
+                Email = Email,
+                Job = SelectedJob,
+                PhoneNumber = PhoneNumber
+            };
+            Name = string.Empty;
+            var saved = await _repository.SaveEmployee(SelectedService.Id, employee);
+
+            if (saved)
+            {
+                var notification = new NotificationManager();
+                var message = edit ? "modifié" : "ajouté";
+                notification.Show(new NotificationContent
+                {
+                    Title = $"{employee.Job}",
+                    Message = $"{employee.Name} a été {message} avec succès",
+                    Type = NotificationType.Success
+                });
+                Reset();
+            }
+        }
+
+        public void Reset()
+        {
             Name = string.Empty;
             Email = string.Empty;
             PhoneNumber = string.Empty;
             MobileNumber = string.Empty;
+            SelectedJob = null;
+            SelectedService = null;
         }
     }
 }
