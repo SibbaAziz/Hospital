@@ -46,7 +46,6 @@ namespace Hospital.Wpf.ViewModels
         private List<Resource> _resources;
         private Department _selectedDepartment;
         private List<Service> _services;
-        private List<Department> _departments;
         private bool _isEdited;
 
         public List<Resource> Resources

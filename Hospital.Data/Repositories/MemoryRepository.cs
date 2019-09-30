@@ -58,8 +58,8 @@ namespace Hospital.Data.Repositories
                 Thread.Sleep(10000);
                 List<Service> services;
                 // Create an instance of the XmlSerializer.
-                XmlSerializer serializer =
-                    new XmlSerializer(typeof(List<Service>));
+
+                var serializer = new XmlSerializer(typeof(List<Service>));
 
                 // Declare an object variable of the type to be deserialized.
 
@@ -101,7 +101,7 @@ namespace Hospital.Data.Repositories
                     }
                 }
                 return true;
-            }).ConfigureAwait(false);
+            });
         }
 
         public IList<string> GetJobs()

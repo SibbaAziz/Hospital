@@ -22,32 +22,43 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:IconButton">
-                    <Border Background="{TemplateBinding Background}" Padding="2,2,2,2">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="35"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Viewbox>
-                                <ContentPresenter Content="{Binding Path=Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:IconButton}}}"/>
-                            </Viewbox>
-                            <ContentPresenter VerticalAlignment="Center" Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Grid.Column="1"/>
-                            <Image x:Name="Loading" Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" gif:ImageBehavior.AnimatedSource="../Images/30.gif" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                        </Grid>
-                    </Border>
+                    <Grid>
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" Padding="2,2,6,2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Viewbox>
+                                    <Grid>
+                                        <ContentPresenter x:Name="Icon" Content="{Binding Path=Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:IconButton}}}"/>
+                                        <Image x:Name="LoadingImage" Margin="4" Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" gif:ImageBehavior.AnimatedSource="../Images/25.gif" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                                    </Grid>
+                                </Viewbox>
+
+                                <ContentPresenter VerticalAlignment="Center" Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Grid.Column="1"/>                                
+                            </Grid>
+                        </Border>
+                        <Border Background="White" Opacity="0.1" Margin="-2,-2,-6,-2" x:Name="Loading" Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </Grid>                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsLoading" Value="True">
+                            <Setter TargetName="Icon" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger SourceName="Bd" Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="White"></Setter>
-            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="LightGray"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#795548"></Setter>
-            </Trigger>
+                <Setter Property="Background" Value="#795548"/>
+            </Trigger>            
         </Style.Triggers>
     </Style>
 

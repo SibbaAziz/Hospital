@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
 using Hospital.Caching;
 using Hospital.Core.Models;
 using Hospital.Core.Repository;
@@ -22,6 +23,19 @@ namespace Hospital.Wpf.ViewModels
         private string _selectedJob;
         private Service _selectedService;
 
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set
+            {
+                if (isLoading != value)
+                {
+                    isLoading = value;
+                    RaisePropertyChanged(nameof(IsLoading));
+                }
+            }
+        }
+
         public List<Service> Services { get; set; }
         public Service SelectedService
         {
@@ -33,6 +47,7 @@ namespace Hospital.Wpf.ViewModels
             }
         }
         private Employee _employee;
+        private bool isLoading;
 
         public List<string> Jobs { get; set; }
         public string SelectedJob
@@ -44,10 +59,8 @@ namespace Hospital.Wpf.ViewModels
             }
         }
 
-        public ICommand SaveCommand { get; set; }
-
-        public bool CanSave => !string.IsNullOrEmpty(Name) && SelectedService != null && ! string.IsNullOrEmpty(SelectedJob);
-
+        public IAsyncCommand SaveCommand { get; set; }
+        
         public string Name
         {
             get => _name;
@@ -75,7 +88,7 @@ namespace Hospital.Wpf.ViewModels
         public AddEmployeeViewModel(IRepository repository)
         {
             _repository = repository;
-            SaveCommand = new RelayCommand(Save, () => CanSave);
+            SaveCommand = new RelayCommandAsync(Save, CanSave);
             Services = CacheContext.GetServices().ToList();
             Jobs = CacheContext.GetJobs().ToList();
             Mediator.Instance.Register((e) =>
@@ -90,7 +103,12 @@ namespace Hospital.Wpf.ViewModels
             }, ViewModelMessages.AskToEditEmployee);
         }
 
-        private async void Save()
+        private bool CanSave()
+        {
+            return !string.IsNullOrEmpty(Name) && SelectedService != null && !string.IsNullOrEmpty(SelectedJob);
+        }
+
+        private async Task Save()
         {
             
             var edit = _employee?.Id != default;
@@ -102,9 +120,9 @@ namespace Hospital.Wpf.ViewModels
                 Job = SelectedJob,
                 PhoneNumber = PhoneNumber
             };
-            Name = string.Empty;
-            var saved = await _repository.SaveEmployee(SelectedService.Id, employee);
-
+            IsLoading = true;
+            var saved = await _repository.SaveEmployee(SelectedService.Id, employee).ConfigureAwait(false);
+            
             if (saved)
             {
                 var notification = new NotificationManager();
@@ -115,6 +133,14 @@ namespace Hospital.Wpf.ViewModels
                     Message = $"{employee.Name} a été {message} avec succès",
                     Type = NotificationType.Success
                 });
+
+
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    IsLoading = false;
+                    Name = string.Empty;
+                    Reset();
+                }));
                 Reset();
             }
         }

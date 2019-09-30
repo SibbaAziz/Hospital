@@ -3,10 +3,10 @@ using System.Windows.Controls;
 
 namespace Hospital.Wpf.Controls
 {
-    [TemplatePart(Name = "Loading", Type = typeof(Image))]
+    [TemplatePart(Name = "Loading", Type = typeof(Border))]
     public class IconButton : Button
     {
-        private Image image;
+        private Border image;
         static IconButton()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(IconButton), new FrameworkPropertyMetadata(typeof(IconButton)));
@@ -16,7 +16,7 @@ namespace Hospital.Wpf.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            image = GetTemplateChild("Loading") as Image;
+            image = GetTemplateChild("Loading") as Border;
             image.MouseDown += Image_MouseDown;
         }
 
